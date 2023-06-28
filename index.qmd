@@ -1,0 +1,114 @@
+---
+from: markdown+emoji
+format: 
+  letterbox-revealjs:
+    css: custom.css
+    progress: false
+    menu: false
+    width: 1280
+    height: 720
+callout-appearance: simple
+bibliography: citations.bib
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(fable)
+```
+
+## {}
+
+::: columns
+::: {.column width="37.5%"}
+:::
+::: {.column width="60%"}
+
+::: {.sticker-float}
+![](resources/fable.svg)
+:::
+
+::: {.title data-id="title"}
+From forecast to fable, design decisions for statistical software.
+:::
+
+::: {.dateplace}
+13th July 2023 @ NYR 2023
+:::
+
+Mitchell O'Hara-Wild, Nectric
+
+::: {.callout-link}
+
+## Useful links
+
+![](resources/forum.svg){.icon} [social.mitchelloharawild.com](https://social.mitchelloharawild.com/)
+
+![](resources/projector-screen-outline.svg){.icon} [slides.mitchelloharawild.com/nyr2023](https://slides.mitchelloharawild.com/nyr2023)
+
+![](resources/github.svg){.icon} [mitchelloharawild/talk-forecast-to-fable](https://github.com/mitchelloharawild/talk-forecast-to-fable)
+
+:::
+
+:::
+:::
+
+<!-- ![](backgrounds/){.image-left} -->
+
+
+## Thanks for your time!
+
+::: columns
+::: {.column width="60%"}
+
+::: {.callout-link}
+## Useful links
+
+![](resources/forum.svg){.icon} [social.mitchelloharawild.com](https://social.mitchelloharawild.com/)
+
+![](resources/projector-screen-outline.svg){.icon} [slides.mitchelloharawild.com/nyr2023](https://slides.mitchelloharawild.com/nyr2023)
+
+![](resources/github.svg){.icon} [mitchelloharawild/talk-forecast-to-fable](https://github.com/mitchelloharawild/talk-forecast-to-fable)
+:::
+
+:::
+:::
+
+<!-- ![](backgrounds/){.image-right} -->
+
+## Unsplash credits
+
+::: {.callout-unsplash}
+
+## Thanks to these Unsplash contributors for their photos
+
+```{r unsplash}
+#| echo: FALSE
+#| cache: TRUE
+library(httr)
+library(purrr)
+unsplash_pattern <- ".*-(.{11})-unsplash\\.jpg$"
+images <- list.files("backgrounds/", pattern = unsplash_pattern)
+ids <- sub(unsplash_pattern, "\\1", images)
+
+get_unsplash_credit <- function(id) {
+  unsplash_url <- "https://api.unsplash.com/" 
+  my_response <- httr::GET(unsplash_url, path = c("photos", id), query = list(client_id=Sys.getenv("UNSPLASH_ACCESS")))
+  xml <- content(my_response)
+  
+  name <- xml$user$name
+  desc <- xml$description%||%"Photo"
+  sprintf(
+    "* %s: [%s%s](%s)",
+    name,
+    strtrim(desc,60-nchar(name)),
+    if(nchar(desc)>(60-nchar(name))) "..." else "",
+    modify_url("https://unsplash.com/", path = file.path("photos", xml$id))
+  )
+}
+htmltools::includeMarkdown(paste0(map_chr(ids, get_unsplash_credit), collapse = "\n"))
+```
+
+:::
+
+## References
