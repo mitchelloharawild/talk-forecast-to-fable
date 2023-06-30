@@ -14,13 +14,20 @@ in Manhattan, New York USA.
 
 #### Abstract
 
-TBC
+A well designed interface is instrumental in making software easy to
+learn and use. The design of statistical software is inherently
+subjective, and there are many difficult decisions involved in creating
+interfaces that work cohesively within the intended domain. In this
+talk, I will examine the design decisions made when creating fable, the
+tidy time series forecasting successor of the widely renowned forecast
+package.
 
 #### Structure (WIP)
 
-- Making R packages
+- Making R packages, existing tools available
 - Design principles: flexibility, extensibility, generality
-- Creating a component
+- Creating the building blocks
+- Lessons learnt from the interface of forecast
 - Embracing tidyverse design
 - Specific comparisons between forecast and fable
 
