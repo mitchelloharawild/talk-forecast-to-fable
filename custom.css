@@ -31,11 +31,27 @@
   margin-bottom:20px;
 }
 
-.sticker-float img {
+img.sticker-float-right {
   height: 160px;
   position: absolute;
   top: -0.5em;
   right: -1em;
+  z-index: 1;
+}
+img.sticker-float-left {
+  height: 160px;
+  position: absolute;
+  top: -0.5em;
+  left: -1em;
+  z-index: 1;
+}
+
+img.sticker-float-midright {
+  height: 160px;
+  position: absolute;
+  top: -0.5em;
+  right: 12em;
+  z-index: 1;
 }
 
 .box {
@@ -123,6 +139,14 @@ img.icon {
   margin-left: 0.85em !important;
 }
 
+.callout.no-icon .callout-body, .callout.no-icon .callout-content {
+  width: 100%;
+}
+
+.callout-content ul {
+  display: block;
+}
+
 div.callout-tip .callout-icon::before {
   background-image: url('resources/lightbulb.png') !important;
 }
@@ -158,10 +182,39 @@ div.callout-question {
   white-space: nowrap;
 }
 
+
+div.callout-pro .callout-icon::before {
+  background-image: url('resources/check.svg');
+}
+div.callout-pro {
+  border-left-color: #04d42c !important;
+  overflow: auto;
+  white-space: nowrap;
+}
+div.callout-con .callout-icon::before {
+  background-image: url('resources/cross.svg');
+}
+div.callout-con {
+  border-left-color: #d9534f !important;
+  overflow: auto;
+  white-space: nowrap;
+}
+
 span.danger {
   color: #D9534F;
 }
 
 span.term {
   color: #4582ec;
+}
+
+.fragment-remove .fragment.fade-out.visible {
+    display: none;
+    height:0px;
+    line-height: 0px;
+    font-size: 0px;
+}
+
+.reveal code {
+  white-space: pre;
 }

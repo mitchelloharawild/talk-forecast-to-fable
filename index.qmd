@@ -1,8 +1,10 @@
 ---
 from: markdown+emoji
+execute: 
+  cache: true
 format: 
   letterbox-revealjs:
-    css: custom.css
+    css: [custom.css, hex.css, timeline.css]
     progress: false
     menu: false
     width: 1280
@@ -20,13 +22,10 @@ library(fable)
 ## {}
 
 ::: columns
-::: {.column width="37.5%"}
+::: {.column width="40%"}
+![](resources/forecast-to-fable.svg){.sticker-float-left}
 :::
 ::: {.column width="60%"}
-
-::: {.sticker-float}
-![](resources/fable.svg)
-:::
 
 ::: {.title data-id="title"}
 From forecast to fable, design decisions for statistical software.
@@ -36,7 +35,7 @@ From forecast to fable, design decisions for statistical software.
 13th July 2023 @ NYR 2023
 :::
 
-Mitchell O'Hara-Wild, Nectric
+##### Mitchell O'Hara-Wild, Nectric
 
 ::: {.callout-link}
 
@@ -53,7 +52,1357 @@ Mitchell O'Hara-Wild, Nectric
 :::
 :::
 
-<!-- ![](backgrounds/){.image-left} -->
+![](backgrounds/amjd-rdwan--MDJDYKQz6E-unsplash.jpg){.image-left}
+
+## {.fragment-remove}
+
+<!-- Talk Abstract: I will reflect on 30+ years of experience in producing open-source software and open-access resources. We'll explore the many benefits of working openly and publicly, including academic, commercial, and social good advantages. Discover how adopting an open mindset can lead to increased collaboration and innovation, as developers and users work together to enhance software and other resources to meet their needs. Open-source software is also more secure and reliable, thanks to the collective review of code by many eyes. We'll also explore the benefits of open-access resources, such as educational materials, research papers, and datasets. By making these resources openly available, we can promote access to knowledge and encourage collaboration among researchers and educators. Move beyond using open-source materials to be a developer of open resources, and help make the world more collaborative, innovative, and equitable. -->
+
+::: {.fragment .fade-out fragment-index=1}
+### A brief history of forecasting in R
+:::
+
+
+::: columns
+::: {.column width="60%"}
+
+::: {.container .fragment .fade-up fragment-index=1}
+::: {.timeline .timeline-left style="height: 720px;"}
+
+
+
+::: {.timeline-block}
+::: {.timeline-icon}
+![](resources/Rlogo.svg)
+:::
+::: {.timeline-content}
+The `ts` package is added to R v0.65
+
+::: {.timeline-details .fragment .fade-out fragment-index=2}
+
+[Time-series functionality from S-PLUS in R.]{style="padding-top:20px;display:block;"}
+
+[Adds many great functions, including `ts()`, `stl()`, `arima()` and... `filter()`!]{style="padding-top:20px;display:block;"}
+
+:::
+::: {.timeline-date}
+Jul 1999
+:::
+:::
+:::
+
+
+
+::: {.timeline-block .fragment .fade-up fragment-index=2}
+::: {.timeline-icon}
+![](resources/forecast.svg)
+:::
+::: {.timeline-content}
+Rob creates the `forecast` package
+
+::: {.timeline-details .fragment .fade-out fragment-index=3}
+![](images/rob.png){style="height:160px;float:right;padding-left:10px"}
+[The package extends `{ts}` with various functions used by Rob in his time-series consulting projects, such as `ets()` and `thetaf()`.]{style="padding-top:20px;display:block;"}
+:::
+::: {.timeline-date}
+Jul 2003
+:::
+:::
+:::
+
+
+
+::: {.timeline-block .fragment .fade-up fragment-index=3}
+::: {.timeline-icon}
+![](resources/forecast.svg)
+:::
+::: {.timeline-content}
+I start working on the `forecast` package
+
+::: {.timeline-details .fragment .fade-out fragment-index=4}
+![](images/mitch.png){style="height:160px;float:right;padding-left:10px"}
+[Working with Rob at Monash University, I start fixing bugs, improving forecasting workflows and adding 'tidy' features to the package.]{style="padding-top:20px;display:block;"}
+:::
+::: {.timeline-date}
+Dec 2015
+:::
+:::
+:::
+
+
+
+::: {.timeline-block .fragment .fade-up fragment-index=4}
+::: {.timeline-icon}
+![](resources/tsibble.svg)
+:::
+::: {.timeline-content}
+Earo creates the `tsibble` package
+
+::: {.timeline-details .fragment .fade-out fragment-index=5}
+![](images/earo.png){style="height:160px;float:right;padding-left:10px"}
+[As part of her PhD, Earo creates `tsibble` - a rectangular and tidyverse compatible time series data alternative to `ts()`.]{style="padding-top:20px;display:block;"}
+
+:::
+::: {.timeline-date}
+Jul 2017
+:::
+:::
+:::
+
+::: {.timeline-block .fragment .fade-up fragment-index=5}
+::: {.timeline-icon}
+![](resources/fable.svg)
+:::
+::: {.timeline-content}
+Mitchell creates the `fable` package
+
+::: {.timeline-details .fragment .fade-out fragment-index=6}
+![](images/mitch.png){style="height:160px;float:right;padding-left:10px"}
+[Building upon `tsibble`, I create `fable` - the tidy time series forecasting successor to the `forecast` package.]{style="padding-top:20px;display:block;"}
+
+:::
+::: {.timeline-date}
+Feb 2018
+:::
+:::
+:::
+
+
+
+::: {.timeline-block .fragment .fade-up fragment-index=6}
+::: {.timeline-icon}
+![](resources/forecast-gray.svg)
+:::
+::: {.timeline-content}
+The `forecast` package is retired
+
+::: {.timeline-details}
+[Still maintained, but no new features.]{style="padding-top:20px;display:block;"}
+
+:::
+::: {.timeline-date}
+Sep 2019
+:::
+:::
+:::
+
+
+
+:::
+:::
+
+
+:::
+:::
+
+![](backgrounds/henry-be-lc7xcWebECc-unsplash.jpg){.image-right}
+
+## {}
+
+### Tools for making R packages
+
+::: columns
+::: {.column width="60%"}
+::: {.callout-tip}
+## Many helpful tools make creating a package easy
+
+:::{.fragment .fade-in}
+From *getting started*, *writing documentation* and *testing code*, there's a package for that.
+
+:::{.hextile .clr}
+* ![](resources/usethis.svg)
+* ![](resources/roxygen2.svg)
+* ![](resources/testthat.svg)
+* ![](resources/pkgdown.svg)
+* ![](resources/vctrs.svg)
+* ![](resources/openai.svg){.fragment}
+:::
+:::
+
+:::
+:::
+:::
+
+![](backgrounds/isabela-kronemberger-OegFhZfw6Ok-unsplash.jpg){.image-right}
+
+## {}
+
+::: columns
+::: {.column width="40%"}
+:::
+::: {.column width="60%"}
+### Tools for *designing* R packages
+
+<!-- :::{.hextile .clr} -->
+<!-- * -->
+<!-- * -->
+<!-- * -->
+<!-- * -->
+<!-- * -->
+<!-- * ![](resources/openai.svg) -->
+<!-- ::: -->
+
+::: {.fragment}
+::: {.callout-important}
+## There aren't (m)any tools for designing packages
+:::{.fragment}
+Perhaps LLMs can help with this too.
+:::
+:::
+:::
+
+::: {.fragment}
+::: {.callout-tip}
+## There are guidelines for good design practices
+
+Designing R packages involves many difficult decisions.
+
+**Good design** is subjective, but is critically important for your package to be **easy to learn and use**.
+
+
+:::{.fragment .fade-in}
+The design varies with the package's purpose, however [tidyverse design](https://design.tidyverse.org/) offers four guiding principles:
+
+::: columns
+::: {.column width=50%}
+* human centered
+* consistent
+:::
+::: {.column width=50%}
+* composable
+* inclusive
+:::
+:::
+
+:::
+
+<!-- In many senses, a more difficult problem -->
+
+<!-- Embracing tidyverse design -->
+
+:::
+:::
+
+:::
+:::
+<!-- ## Efforts to improve forecast before burning it all down and starting again -->
+
+<!-- * consistency improvements - transformations -->
+<!-- * argument orders for piping, 'tidy'? -->
+<!-- * ggplot support -->
+
+<!-- Learnt a lot, but some things couldn't be fixed. -->
+
+![](backgrounds/chris-lee-70l1tDAI6rM-unsplash.jpg){.image-left}
+
+## {}
+
+::: columns
+::: {.column width="60%"}
+
+### Design of the forecast package
+
+:::{.callout-note icon=false}
+![](resources/forecast.svg){style="height:160px;float:right;padding-left:10px"}
+
+* [Forecasting **individual** time series]{.fragment .fade-up fragment-index=1}
+* [**Regular** and **infrequent** observations<br> (monthly, quarterly or annually)]{.fragment .fade-up fragment-index=2}
+* [**Point forecasts** and **intervals**]{.fragment .fade-up fragment-index=3}
+* [Consistent with `ts` models]{.fragment .fade-up fragment-index=4}
+:::
+
+### Design of the fable package
+
+:::{.callout-note icon=false}
+![](resources/fable.svg){style="height:160px;float:right;padding-left:10px"}
+
+* [Forecasting **many** time series]{.fragment .fade-up fragment-index=1}
+* [Observations at **any time**<br> (sub-daily, irregular, monthly, etc.)]{.fragment .fade-up fragment-index=2}
+* [Forecast **distributions**]{.fragment .fade-up fragment-index=3}
+* [Consistent with the `tidyverse`]{.fragment .fade-up fragment-index=4}
+:::
+
+<!-- Both are designed to be easy to use -->
+
+:::
+:::
+
+![](backgrounds/david-pisnoy-46juD4zY1XA-unsplash.jpg){.image-right}
+
+<!-- Show an example of {ts+forecast} usage -->
+
+<!-- ## Design mistakes of the forecast package -->
+
+<!-- * forecast output contents ($mean meaning) -->
+
+<!-- ## Design limitations of the forecast package -->
+
+<!-- <!-- Designed for individual monthly and quarterly series --> -->
+<!-- <!-- A whole new language for time series, built upon {ts} --> -->
+
+<!-- * not extensible -->
+## {auto-animate=true}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: data
+
+Consider trips to Australia :australia: :kangaroo:
+
+```{r, include = FALSE}
+library(tsibble)
+library(dplyr)
+tourism <- tsibble::tourism |> 
+  group_by(Purpose) |> 
+  summarise(Trips = sum(Trips)) |> 
+  as_tibble() |> 
+  mutate(Quarter = as.Date(Quarter))
+tourism |> write_csv("tourism.csv")
+```
+
+```{r, echo = TRUE, eval = FALSE}
+tourism <- read_csv("https://slides.mitchelloharawild.com/nyr2023/tourism.csv")
+tourism
+```
+
+```{r, echo = FALSE}
+tourism
+```
+
+
+
+:::
+
+:::
+![](backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg){.image-left data-id="bg"}
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: data
+
+```{r, echo = TRUE, `code-line-numbers`="2-3|4-5"}
+tourism_ts <- tourism |> 
+  group_by(Quarter) |> 
+  summarise(Trips = sum(Trips)) |> 
+  pull(Trips) |> 
+  ts(start = c(1998, 1), frequency = 4)
+tourism_ts
+```
+
+:::
+
+:::
+
+![](resources/forecast.svg){.sticker-float-right}
+![](backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg){.image-left data-id="bg"}
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: data
+
+```{r, echo = TRUE, `code-line-numbers`="7"}
+tourism_ts <- tourism |> 
+  group_by(Quarter) |> 
+  summarise(Trips = sum(Trips)) |> 
+  pull(Trips) |> 
+  ts(start = c(1998, 1), frequency = 4)
+tourism_ts |> 
+  window(start = c(2012, 2))
+```
+
+
+:::
+
+:::
+
+![](resources/forecast.svg){.sticker-float-right}
+![](backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg){.image-left data-id="bg"}
+
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: data
+
+```{r, echo = TRUE, eval=FALSE, `code-line-numbers`="2-5|7-8"}
+tourism |> 
+  pivot_wider(
+    names_from = Purpose, 
+    values_from = Trips
+  ) |> 
+  select(-Quarter) |> 
+  as.matrix() |> 
+  ts(start = c(1998, 1), frequency = 4)
+```
+
+```{r, echo = FALSE}
+tourism |> 
+  pivot_wider(
+    names_from = Purpose, 
+    values_from = Trips
+  ) |> 
+  select(-Quarter) |> 
+  head(6) |> 
+  as.matrix() |> 
+  ts(start = c(1998, 1), frequency = 4)
+```
+
+
+
+:::
+
+:::
+
+![](resources/forecast.svg){.sticker-float-right}
+![](backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg){.image-left data-id="bg"}
+
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: data
+
+The `ts` data format
+
+:::{.fragment .fade-in}
+:::{.callout-pro}
+## Pros
+
+* Very minimal and efficient
+:::
+:::
+
+:::{.fragment .fade-in}
+:::{.callout-con}
+## Cons
+
+* Doesn't work well with multiple series and variables
+* Limited domain specific functions like `window()`
+* Requires regular time series
+
+:::
+:::
+
+
+:::
+
+:::
+
+![](resources/forecast.svg){.sticker-float-right}
+![](backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg){.image-left data-id="bg"}
+
+
+<!-- ## {} -->
+
+<!-- ::: columns -->
+
+<!-- ::: {.column width="40%"} -->
+<!-- ::: -->
+
+<!-- ::: {.column width="52%"} -->
+<!-- ### Design element: data -->
+
+<!-- ![](resources/forecast.svg){.sticker-float-right} -->
+
+<!-- ```{r, include = FALSE} -->
+<!-- options(width = 46) -->
+<!-- ``` -->
+
+
+<!-- ```{r, echo = TRUE} -->
+<!-- tourism |>  -->
+<!--   group_by(Region, State, Purpose) |>  -->
+<!--   summarise(Trips = list( -->
+<!--     ts(Trips, start = c(1998, 1), frequency = 4) -->
+<!--   )) -->
+<!-- ``` -->
+
+
+<!-- ::: -->
+
+<!-- ::: -->
+<!-- ![](backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg){.image-left data-id="bg"} -->
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: data
+
+```{r, echo = TRUE, `code-line-numbers`="4-7"}
+library(tsibble)
+tourism_tsbl <- tourism |> 
+  mutate(Quarter = yearquarter(Quarter)) |> 
+  as_tsibble(
+    index = Quarter,
+    key = Purpose
+  )
+tourism_tsbl
+```
+
+
+:::
+
+:::
+
+![](resources/fable.svg){.sticker-float-right}
+![](backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg){.image-left data-id="bg"}
+
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: data
+
+```{r, echo = TRUE, `code-line-numbers`="9"}
+library(tsibble)
+tourism_tsbl <- tourism |> 
+  mutate(Quarter = yearquarter(Quarter)) |> 
+  as_tsibble(
+    index = Quarter,
+    key = Purpose
+  )
+tourism_tsbl |> 
+  filter(Quarter >= yearquarter("2012 Q2"))
+```
+
+
+:::
+
+:::
+
+![](resources/fable.svg){.sticker-float-right}
+![](backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg){.image-left data-id="bg"}
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: data
+
+The `tsibble` data format
+
+:::{.fragment .fade-in}
+:::{.callout-pro}
+## Pros
+
+* Works great with multiple series and variables
+* Fully compatible with `tidyverse` functions
+* Supports observations at any time and frequency
+:::
+:::
+
+:::{.fragment .fade-in}
+:::{.callout-con}
+## Cons
+
+* Less space efficient
+
+:::
+:::
+
+
+:::{.fragment .fade-in}
+:::{.callout-tip}
+## Tip
+
+Design for compatibility with **familiar** functions.
+
+:::
+:::
+
+
+:::
+
+:::
+
+![](resources/fable.svg){.sticker-float-right}
+![](backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg){.image-left data-id="bg"}
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+![](resources/forecast.svg){.sticker-float-midright}
+
+### Design element: models
+
+:::{.fragment .fade-in}
+```{r, echo = TRUE}
+library(forecast)
+tourism_ts |> 
+  ets(model = "AAA", damped = FALSE, lambda = 0)
+```
+
+:::{.callout-note icon=false}
+Designed with similarity to `stats::arima()`.
+:::
+:::
+
+
+:::
+:::
+
+![](backgrounds/david-becker-crs2vlkSe98-unsplash.jpg){.image-right}
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+![](resources/forecast.svg){.sticker-float-midright}
+
+### Design element: models
+
+```{r, echo = TRUE}
+library(forecast)
+tslm(tourism_ts ~ trend + season, lambda = 0)
+```
+
+<br><br><br><br>
+
+:::{.callout-note icon=false}
+Similarity to `stats::lm()`, but inconsistent with `ets()`.
+:::
+
+:::
+:::
+
+![](backgrounds/david-becker-crs2vlkSe98-unsplash.jpg){.image-right}
+
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+![](resources/forecast.svg){.sticker-float-midright}
+
+### Design element: models
+
+```{r, echo = TRUE}
+library(forecast)
+tourism_ts |> 
+  snaive()
+```
+
+<br><br><br>
+
+:::{.callout-note icon=false}
+Forecasting *methods* directly produce forecasts?
+:::
+
+:::
+:::
+
+![](backgrounds/david-becker-crs2vlkSe98-unsplash.jpg){.image-right}
+
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+![](resources/forecast.svg){.sticker-float-midright}
+
+### Design element: models
+
+```{r, echo = TRUE}
+library(forecast)
+tourism_ts |> 
+  stlm(method = "ets", etsmodel = "AAN", lambda = 0)
+```
+
+:::{.callout-note icon=false}
+Limited flexibility for specifying models of models.
+:::
+
+:::
+:::
+
+![](backgrounds/david-becker-crs2vlkSe98-unsplash.jpg){.image-right}
+
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+![](resources/fable.svg){.sticker-float-midright}
+
+### Design element: models
+
+```{r fable, echo=TRUE}
+library(fable)
+tourism_tsbl |> 
+  model(
+    ets = ETS(log(Trips+1) ~ error("A") + trend("A") + season("A")),
+    lm = TSLM(log(Trips+1) ~ trend() + season()),
+    snaive = SNAIVE(Trips)
+  )
+```
+
+:::
+:::
+
+![](backgrounds/david-becker-crs2vlkSe98-unsplash.jpg){.image-right}
+
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+![](resources/fable.svg){.sticker-float-midright}
+
+### Design element: models
+
+```{r fable-dcmp, echo=TRUE}
+library(feasts)
+tourism_tsbl |> 
+  model(
+    stlm = decomposition_model(
+      STL(log(Trips + 1)),
+      ETS(season_adjust ~ season("N"))
+    )
+  )
+```
+
+:::
+:::
+
+![](backgrounds/david-becker-crs2vlkSe98-unsplash.jpg){.image-right}
+
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+![](resources/fable.svg){.sticker-float-midright}
+
+### Design element: models
+
+:::{.callout-note}
+## Key differences
+
+Improving upon forecast, the fable package...
+
+* [applies a **consistent** `y~x` model **interface**]{.fragment .fade-in}
+* [**separates** model **specification** from model **fitting**]{.fragment .fade-in}
+* [allows **any** combination of decomposition & model]{.fragment .fade-in}
+
+:::
+
+<br><br>
+
+:::{.fragment .fade-in}
+:::{.callout-tip}
+## Tip
+
+Design **consistent** interfaces with **small components**.
+
+:::
+:::
+
+<!-- * (+ transformations) - smaller parts + consistency -->
+<!-- * stl forecasting -->
+<!-- * model spec+output inconsistency -->
+:::
+:::
+
+![](backgrounds/david-becker-crs2vlkSe98-unsplash.jpg){.image-right}
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+![](resources/forecast.svg){.sticker-float-right}
+
+### Design element: accuracy
+
+:::{.fragment .fade-in}
+```{r, echo = TRUE}
+tourism_ts |> 
+  ets(model = "AAA", damped = FALSE, lambda = 0) |> 
+  accuracy()
+```
+:::
+<br>
+
+:::{.fragment .fade-in}
+```{r, echo = TRUE}
+tslm(tourism_ts ~ trend + season, lambda = 0) |> 
+  accuracy()
+```
+
+:::
+<br>
+
+:::{.fragment .fade-in}
+```{r, echo = TRUE}
+tourism_ts |> 
+  snaive() |> 
+  accuracy()
+```
+:::
+
+:::
+:::
+
+![](backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg){.image-left}
+
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: accuracy
+
+```{r, echo = TRUE, `code-line-numbers`="2"}
+tourism_tsbl |>
+  summarise(Trips = sum(Trips)) |>
+  model(
+    ets = ETS(log(Trips+1) ~ error("A") + trend("A") + season("A")),
+    lm = TSLM(log(Trips+1) ~ trend() + season()),
+    snaive = SNAIVE(Trips)
+  )
+```
+
+:::
+:::
+
+![](backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg){.image-left}
+![](resources/fable.svg){.sticker-float-right}
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: accuracy
+
+```{r, echo = TRUE, `code-line-numbers`="8"}
+tourism_tsbl |>
+  summarise(Trips = sum(Trips)) |>
+  model(
+    ets = ETS(log(Trips+1) ~ error("A") + trend("A") + season("A")),
+    lm = TSLM(log(Trips+1) ~ trend() + season()),
+    snaive = SNAIVE(Trips)
+  ) |> 
+  accuracy()
+```
+
+:::
+:::
+
+![](backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg){.image-left}
+![](resources/fable.svg){.sticker-float-right}
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: accuracy
+
+```{r, echo = TRUE, `code-line-numbers`="1-3,11|5"}
+med_abs_e <- function(.resid, ...){
+  median(abs(.resid), na.rm=TRUE)
+}
+tourism_tsbl |>
+  summarise(Trips = sum(Trips)) |>
+  model(
+    ets = ETS(log(Trips+1) ~ error("A") + trend("A") + season("A")),
+    lm = TSLM(log(Trips+1) ~ trend() + season()),
+    snaive = SNAIVE(Trips)
+  ) |> 
+  accuracy(measures = lst(med_abs_e))
+```
+
+:::
+:::
+
+![](backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg){.image-left}
+![](resources/fable.svg){.sticker-float-right}
+
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: accuracy
+
+```{r, echo = TRUE}
+med_abs_e <- function(.resid, ...){
+  median(abs(.resid), na.rm=TRUE)
+}
+tourism_tsbl |>
+  model(
+    ets = ETS(log(Trips+1) ~ error("A") + trend("A") + season("A")),
+    lm = TSLM(log(Trips+1) ~ trend() + season()),
+    snaive = SNAIVE(Trips)
+  ) |> 
+  accuracy(measures = lst(med_abs_e))
+```
+
+:::
+:::
+
+![](backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg){.image-left}
+![](resources/fable.svg){.sticker-float-right}
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: accuracy
+
+```{r, echo = TRUE, `code-line-numbers`="11-12"}
+med_abs_e <- function(.resid, ...){
+  median(abs(.resid), na.rm=TRUE)
+}
+tourism_tsbl |>
+  model(
+    ets = ETS(log(Trips+1) ~ error("A") + trend("A") + season("A")),
+    lm = TSLM(log(Trips+1) ~ trend() + season()),
+    snaive = SNAIVE(Trips)
+  ) |> 
+  accuracy(measures = lst(med_abs_e)) |> 
+  group_by(.model) |> 
+  summarise(mean(med_abs_e))
+```
+
+:::
+:::
+
+![](backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg){.image-left}
+![](resources/fable.svg){.sticker-float-right}
+
+
+## {}
+
+::: columns
+
+::: {.column width="40%"}
+:::
+
+::: {.column width="60%"}
+### Design element: accuracy
+
+:::{.callout-note}
+## Key differences
+
+Improving upon forecast, the fable package...
+
+* [easily **compares accuracy** across models and series]{.fragment .fade-in}
+* [supports **custom functions** for accuracy metrics]{.fragment .fade-in}
+
+:::
+
+<br><br>
+
+:::{.fragment .fade-in}
+:::{.callout-tip}
+## Tip
+
+Design **extensible** elements for generic functions.
+
+:::
+:::
+
+:::
+:::
+
+![](backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg){.image-left}
+
+
+
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+
+![](resources/forecast.svg){.sticker-float-midright}
+
+### Design element: forecasts
+
+:::{.fragment .fade-in}
+```{r, echo = TRUE}
+library(forecast)
+tourism_ts |> 
+  ets(model = "AAA", damped = FALSE, lambda = 0) |> 
+  forecast()
+```
+
+:::{.callout-note icon=false}
+Provides point forecasts and intervals.
+:::
+:::
+:::
+:::
+
+![](backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg){.image-right}
+
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+
+![](resources/forecast.svg){.sticker-float-midright}
+
+### Design element: forecasts
+
+```{r, echo = TRUE}
+library(forecast)
+tourism_ts |> 
+  ets(model = "AAA", damped = FALSE, lambda = 0) |> 
+  forecast(level = c(50, 75))
+```
+
+:::{.callout-note icon=false}
+Changing the intervals recomputes the forecasts
+:::
+:::
+:::
+
+![](backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg){.image-right}
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+
+![](resources/forecast.svg){.sticker-float-midright}
+
+### Design element: forecasts
+
+```{r, echo = TRUE}
+library(forecast)
+fc <- tourism_ts |> 
+  ets(model = "AAA", damped = FALSE, lambda = 0) |> 
+  forecast(level = c(50, 75))
+fc$mean
+```
+
+```{r, echo = TRUE, eval = FALSE}
+fc$upper
+```
+
+```{r}
+fc$upper |> head(2)
+```
+
+```{r, echo = TRUE, eval = FALSE}
+fc$lower
+```
+
+```{r}
+fc$lower |> head(2)
+```
+
+:::{.fragment .fade-in}
+:::{.callout-note icon=false}
+The forecast mean is in `$mean`... or is it?
+:::
+:::
+:::
+:::
+
+![](backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg){.image-right}
+
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+
+![](resources/forecast.svg){.sticker-float-midright}
+
+### Design element: forecasts
+
+```{r, echo = TRUE}
+library(forecast)
+fc <- tourism_ts |> 
+  ets(model = "AAA", damped = FALSE, lambda = 0, biasadj = TRUE) |> 
+  forecast(level = c(50, 75))
+fc$mean
+```
+
+<br><br>
+
+:::{.fragment .fade-in}
+:::{.callout-note icon=false}
+The transformation has skewed the distribution, and `$mean` is now actually the forecast distribution's **median**!
+
+To obtain the **mean**, set `biasadj = TRUE`. Huh?!
+:::
+:::
+:::
+:::
+
+![](backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg){.image-right}
+
+## {.fragment-remove}
+
+::: columns
+
+::: {.column width="60%"}
+
+
+![](resources/fable.svg){.sticker-float-midright}
+
+### Design element: forecasts
+
+:::{.fragment .fade-out fragment-index=1}
+```{r, echo = TRUE, eval = FALSE}
+fc <- tourism_tsbl |> 
+  model(
+    ets = ETS(log(Trips + 1) ~ error("A") + trend("A") + season("A"))
+  ) |> 
+  forecast()
+fc
+```
+:::
+
+```{r}
+fc <- tourism_tsbl |> 
+  model(
+    ets = ETS(log(Trips + 1) ~ error("A") + trend("A") + season("A"))
+  ) |> 
+  forecast()
+fc
+```
+
+<br>
+
+:::{.fragment .fade-up fragment-index=1}
+:::{.callout-note icon=false}
+fable returns a data frame containing **forecast distributions**
+
+
+:::{.fragment .fade-in fragment-index=2}
+Yes, `$.mean` contains the distribution's **mean**.
+:::
+:::
+:::
+:::
+:::
+
+![](backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg){.image-right}
+
+
+## {.fragment-remove}
+
+::: columns
+
+::: {.column width="60%"}
+
+
+![](resources/fable.svg){.sticker-float-midright}
+
+### Design element: forecasts
+
+:::{.fragment .fade-out fragment-index=1}
+```{r, echo = TRUE, eval = FALSE}
+fc |> 
+  select(-.model) |> 
+  mutate(
+    .mean = mean(Trips),
+    .median = median(Trips),
+    .int95 = hilo(Trips, 95)
+  )
+```
+:::
+
+```{r}
+fc |> 
+  select(-.model) |> 
+  mutate(
+    .mean = mean(Trips),
+    .median = median(Trips),
+    .int95 = hilo(Trips, 95)
+  )
+```
+
+<br>
+
+:::{.fragment .fade-up fragment-index=1}
+:::{.callout-note icon=false}
+Distributions can be computed on. Calculate the `mean()`, `median()`, `hilo()`, `quantile()`, `cdf()` and more.
+:::
+:::
+:::
+:::
+
+![](backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg){.image-right}
+
+
+## {}
+
+::: columns
+
+::: {.column width="60%"}
+
+### Design element: forecasts
+
+
+:::{.callout-note}
+## Key differences
+
+Improving upon forecast, the fable package...
+
+* [produces **forecast distributions**]{.fragment .fade-in}
+* [returns a data frame, ready for further tidyverse use]{.fragment .fade-in}
+* [avoids confusing terms like `biasadj` for `$mean`]{.fragment .fade-in}
+
+:::
+
+<br><br>
+
+:::{.fragment .fade-in}
+:::{.callout-tip}
+## Tip
+
+Use **simple** and **descriptive** input and output **names**.
+
+Produce helpful **outputs** that are **ready to use**.
+
+:::
+:::
+
+:::
+:::
+
+![](backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg){.image-right}
+
+<!-- ## The payoff -->
+
+<!-- Show some wildly general things you can do with fable. -->
+
+<!-- * <https://stackoverflow.com/questions/58283490> -->
+<!-- * no limits, reconcile an ensemble of decomposition forecasts. -->
+
+## Summary
+
+::: columns
+::: {.column width="60%"}
+
+::: {.fragment .fade-in}
+::: {.callout-note}
+## Design principles
+
+Recall the tidyverse design principles,
+
+::: {.columns style="display:inline-block;width:600px"}
+::: {.column width=50%}
+* human centered
+* consistent
+:::
+::: {.column width=50%}
+* composable
+* inclusive
+:::
+:::
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.callout-tip}
+## Design tips
+
+* Build upon existing **familiar** functions to users
+* Be internally and externally **consistent**
+* Break the problem into **small building blocks**
+* Use **simple** and **descriptive names**.
+* Produce helpful **outputs** that are **ready to use**.
+
+:::
+:::
+
+:::
+:::
+
+![](backgrounds/max-saeling-_CGxNOLM1gQ-unsplash.jpg){.image-right}
 
 
 ## Thanks for your time!
@@ -61,6 +1410,14 @@ Mitchell O'Hara-Wild, Nectric
 ::: columns
 ::: {.column width="60%"}
 
+::: {.callout-tip}
+## Final remarks
+
+* Think about the design of packages you make or use.
+* Try forecasting with fable, it's easy by design!
+* Let's chat during the break - especially if it's about about software, teaching, forecasting or permaculture.
+:::
+
 ::: {.callout-link}
 ## Useful links
 
@@ -74,7 +1431,10 @@ Mitchell O'Hara-Wild, Nectric
 :::
 :::
 
-<!-- ![](backgrounds/){.image-right} -->
+![](backgrounds/max-saeling-_CGxNOLM1gQ-unsplash.jpg){.image-right}
+
+<!-- Made with :heart: and [Quarto](https://quarto.org/). -->
+
 
 ## Unsplash credits
 
@@ -111,4 +1471,4 @@ htmltools::includeMarkdown(paste0(map_chr(ids, get_unsplash_credit), collapse = 
 
 :::
 
-## References
+<!-- ## References -->
