@@ -11,6 +11,8 @@ format:
     height: 720
 callout-appearance: simple
 bibliography: citations.bib
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r}
@@ -1456,7 +1458,10 @@ Recall the tidyverse design principles,
 library(httr)
 library(purrr)
 unsplash_pattern <- ".*-(.{11})-unsplash\\.jpg$"
-images <- list.files("backgrounds/", pattern = unsplash_pattern)
+slides <- readLines("index.qmd")
+backgrounds <- slides[grepl("backgrounds/.+?unsplash.jpg", slides)]
+images <- unique(sub(".*\\(backgrounds/(.+?)\\).*", "\\1", backgrounds))
+images <- images[grepl(unsplash_pattern, images)]
 ids <- sub(unsplash_pattern, "\\1", images)
 
 get_unsplash_credit <- function(id) {
