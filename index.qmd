@@ -1143,7 +1143,7 @@ Changing the intervals recomputes the forecasts
 
 ![](backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg){.image-right}
 
-## {}
+## {.fragment-remove}
 
 ::: columns
 
@@ -1157,10 +1157,13 @@ Changing the intervals recomputes the forecasts
 ```{r, echo = TRUE}
 library(forecast)
 fc <- tourism_ts |> 
-  ets(model = "AAA", damped = FALSE, lambda = 0) |> 
+  ets(model = "AAA", damped = FALSE, 
+      lambda = 0) |> 
   forecast(level = c(50, 75))
 fc$mean
 ```
+
+:::{.fragment .fade-out fragment-index=2}
 
 ```{r, echo = TRUE, eval = FALSE}
 fc$upper
@@ -1178,11 +1181,22 @@ fc$lower
 fc$lower |> head(2)
 ```
 
-:::{.fragment .fade-in}
+:::
+
+:::{.fragment .fade-in fragment-index=1}
 :::{.callout-note icon=false}
 The forecast mean is in `$mean`... or is it?
 :::
 :::
+
+:::{.fragment .fade-in fragment-index=2}
+:::{.callout-note icon=false}
+The transformation has skewed the distribution, and `$mean` is now actually the forecast distribution's **median**!
+
+To obtain the **mean**, set `biasadj = TRUE`. Huh?!
+:::
+:::
+
 :::
 :::
 
@@ -1203,20 +1217,12 @@ The forecast mean is in `$mean`... or is it?
 ```{r, echo = TRUE}
 library(forecast)
 fc <- tourism_ts |> 
-  ets(model = "AAA", damped = FALSE, lambda = 0, biasadj = TRUE) |> 
+  ets(model = "AAA", damped = FALSE, 
+      lambda = 0, biasadj = TRUE) |> 
   forecast(level = c(50, 75))
 fc$mean
 ```
 
-<br><br>
-
-:::{.fragment .fade-in}
-:::{.callout-note icon=false}
-The transformation has skewed the distribution, and `$mean` is now actually the forecast distribution's **median**!
-
-To obtain the **mean**, set `biasadj = TRUE`. Huh?!
-:::
-:::
 :::
 :::
 

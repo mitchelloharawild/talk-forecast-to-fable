@@ -171,6 +171,7 @@ div.callout-unsplash {
   border-left-color: #000 !important;
   overflow: auto;
   white-space: nowrap;
+  height: 600px;
 }
 
 div.callout-question .callout-icon::before {
