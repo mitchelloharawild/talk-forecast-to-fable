@@ -22,14 +22,17 @@ talk, I will examine the design decisions made when creating fable, the
 tidy time series forecasting successor of the widely renowned forecast
 package.
 
-#### Structure (WIP)
+#### Structure
 
-- Making R packages, existing tools available
-- Design principles: flexibility, extensibility, generality
-- Creating the building blocks
-- Lessons learnt from the interface of forecast
-- Embracing tidyverse design
-- Specific comparisons between forecast and fable
+- Intro, open source, forecasting history (3 minutes)
+- Making R packages, existing tools available (2 minutes)
+- Design principles (1 minute)
+- Design goals of forecast and fable (1 minute)
+- Data designs (3+ minutes)
+- Model interfaces (3 minutes)
+- Accuracy evaluation (2+ minutes)
+- Forecasting futures (3+ minutes)
+- Conclude (1 minute)
 
 ### Format
 
