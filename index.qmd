@@ -1103,7 +1103,8 @@ Design **extensible** elements for generic functions.
 ```{r, echo = TRUE}
 library(forecast)
 tourism_ts |> 
-  ets(model = "AAA", damped = FALSE, lambda = 0) |> 
+  ets(model = "AAA", damped = FALSE, 
+      lambda = 0) |> 
   forecast()
 ```
 
@@ -1131,7 +1132,8 @@ Provides point forecasts and intervals.
 ```{r, echo = TRUE}
 library(forecast)
 tourism_ts |> 
-  ets(model = "AAA", damped = FALSE, lambda = 0) |> 
+  ets(model = "AAA", damped = FALSE,
+      lambda = 0) |> 
   forecast(level = c(50, 75))
 ```
 
