@@ -27,9 +27,75 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link rel="stylesheet" href="custom.css">
+  <link rel="stylesheet" href="hex.css">
+  <link rel="stylesheet" href="timeline.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -327,19 +393,16 @@
 <section id="section" class="slide level2">
 <h2></h2>
 <div class="columns">
-<div class="column" style="width:37.5%;">
-
+<div class="column" style="width:40%;">
+<p><img data-src="resources/forecast-to-fable.svg" class="sticker-float-left"></p>
 </div><div class="column" style="width:60%;">
-<div class="sticker-float">
-<p><img data-src="resources/fable.svg"></p>
-</div>
 <div class="title" data-id="title">
 <p>From forecast to fable, design decisions for statistical software.</p>
 </div>
 <div class="dateplace">
 <p>13th July 2023 @ NYR 2023</p>
 </div>
-<p>Mitchell O’Hara-Wild, Nectric</p>
+<h5 id="mitchell-ohara-wild-nectric">Mitchell O’Hara-Wild, Nectric</h5>
 <div class="callout callout-link callout-captioned callout-style-simple">
 <div class="callout-body">
 <div class="callout-caption">
@@ -357,12 +420,1676 @@
 </div>
 </div>
 </div>
-<!-- ![](backgrounds/){.image-left} -->
+<p><img data-src="backgrounds/amjd-rdwan--MDJDYKQz6E-unsplash.jpg" class="image-left"></p>
 </section>
+<section id="section-1" class="slide level2 fragment-remove">
+<h2></h2>
+
+<!-- Talk Abstract: I will reflect on 30+ years of experience in producing open-source software and open-access resources. We'll explore the many benefits of working openly and publicly, including academic, commercial, and social good advantages. Discover how adopting an open mindset can lead to increased collaboration and innovation, as developers and users work together to enhance software and other resources to meet their needs. Open-source software is also more secure and reliable, thanks to the collective review of code by many eyes. We'll also explore the benefits of open-access resources, such as educational materials, research papers, and datasets. By making these resources openly available, we can promote access to knowledge and encourage collaboration among researchers and educators. Move beyond using open-source materials to be a developer of open resources, and help make the world more collaborative, innovative, and equitable. -->
+<div class="fragment fade-out" data-fragment-index="1">
+<!-- -->
+<h3 id="a-brief-history-of-forecasting-in-r">A brief history of forecasting in R</h3>
+</div>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="container fragment fade-up" data-fragment-index="1">
+<div class="timeline timeline-left" style="height: 720px;">
+<div class="timeline-block">
+<div class="timeline-icon">
+<p><img data-src="resources/Rlogo.svg"></p>
+</div>
+<div class="timeline-content">
+<p>The <code>ts</code> package is added to R v0.65</p>
+<div class="timeline-details fragment fade-out" data-fragment-index="2">
+<p><span style="padding-top:20px;display:block;">Time-series functionality from S-PLUS in R.</span></p>
+<p><span style="padding-top:20px;display:block;">Adds many great functions, including <code>ts()</code>, <code>stl()</code>, <code>arima()</code> and… <code>filter()</code>!</span></p>
+</div>
+<div class="timeline-date">
+<p>Jul 1999</p>
+</div>
+</div>
+</div>
+<div class="timeline-block fragment fade-up" data-fragment-index="2">
+<div class="timeline-icon">
+<p><img data-src="resources/forecast.svg"></p>
+</div>
+<div class="timeline-content">
+<p>Rob creates the <code>forecast</code> package</p>
+<div class="timeline-details fragment fade-out" data-fragment-index="3">
+<p><img data-src="images/rob.png" style="height:160px;float:right;padding-left:10px"> <span style="padding-top:20px;display:block;">The package extends <code>{ts}</code> with various functions used by Rob in his time-series consulting projects, such as <code>ets()</code> and <code>thetaf()</code>.</span></p>
+</div>
+<div class="timeline-date">
+<p>Jul 2003</p>
+</div>
+</div>
+</div>
+<div class="timeline-block fragment fade-up" data-fragment-index="3">
+<div class="timeline-icon">
+<p><img data-src="resources/forecast.svg"></p>
+</div>
+<div class="timeline-content">
+<p>I start working on the <code>forecast</code> package</p>
+<div class="timeline-details fragment fade-out" data-fragment-index="4">
+<p><img data-src="images/mitch.png" style="height:160px;float:right;padding-left:10px"> <span style="padding-top:20px;display:block;">Working with Rob at Monash University, I start fixing bugs, improving forecasting workflows and adding ‘tidy’ features to the package.</span></p>
+</div>
+<div class="timeline-date">
+<p>Dec 2015</p>
+</div>
+</div>
+</div>
+<div class="timeline-block fragment fade-up" data-fragment-index="4">
+<div class="timeline-icon">
+<p><img data-src="resources/tsibble.svg"></p>
+</div>
+<div class="timeline-content">
+<p>Earo creates the <code>tsibble</code> package</p>
+<div class="timeline-details fragment fade-out" data-fragment-index="5">
+<p><img data-src="images/earo.png" style="height:160px;float:right;padding-left:10px"> <span style="padding-top:20px;display:block;">As part of her PhD, Earo creates <code>tsibble</code> - a rectangular and tidyverse compatible time series data alternative to <code>ts()</code>.</span></p>
+</div>
+<div class="timeline-date">
+<p>Jul 2017</p>
+</div>
+</div>
+</div>
+<div class="timeline-block fragment fade-up" data-fragment-index="5">
+<div class="timeline-icon">
+<p><img data-src="resources/fable.svg"></p>
+</div>
+<div class="timeline-content">
+<p>Mitchell creates the <code>fable</code> package</p>
+<div class="timeline-details fragment fade-out" data-fragment-index="6">
+<p><img data-src="images/mitch.png" style="height:160px;float:right;padding-left:10px"> <span style="padding-top:20px;display:block;">Building upon <code>tsibble</code>, I create <code>fable</code> - the tidy time series forecasting successor to the <code>forecast</code> package.</span></p>
+</div>
+<div class="timeline-date">
+<p>Feb 2018</p>
+</div>
+</div>
+</div>
+<div class="timeline-block fragment fade-up" data-fragment-index="6">
+<div class="timeline-icon">
+<p><img data-src="resources/forecast-gray.svg"></p>
+</div>
+<div class="timeline-content">
+<p>The <code>forecast</code> package is retired</p>
+<div class="timeline-details">
+<p><span style="padding-top:20px;display:block;">Still maintained, but no new features.</span></p>
+</div>
+<div class="timeline-date">
+<p>Sep 2019</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/henry-be-lc7xcWebECc-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<h3 id="tools-for-making-r-packages">Tools for making R packages</h3>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="callout callout-tip callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Many helpful tools make creating a package easy</strong></p>
+</div>
+<div class="callout-content">
+<div class="fragment fade-in">
+<p>From <em>getting started</em>, <em>writing documentation</em> and <em>testing code</em>, there’s a package for that.</p>
+<div class="hextile clr">
+<ul>
+<li><img data-src="resources/usethis.svg"></li>
+<li><img data-src="resources/roxygen2.svg"></li>
+<li><img data-src="resources/testthat.svg"></li>
+<li><img data-src="resources/pkgdown.svg"></li>
+<li><img data-src="resources/vctrs.svg"></li>
+<li><img data-src="resources/openai.svg" class="fragment"></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/isabela-kronemberger-OegFhZfw6Ok-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="tools-for-designing-r-packages">Tools for <em>designing</em> R packages</h3>
+<!-- :::{.hextile .clr} -->
+<!-- * -->
+<!-- * -->
+<!-- * -->
+<!-- * -->
+<!-- * -->
+<!-- * ![](resources/openai.svg) -->
+<!-- ::: -->
+<div class="fragment">
+<div class="callout callout-important callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>There aren’t (m)any tools for designing packages</strong></p>
+</div>
+<div class="callout-content">
+<div class="fragment">
+<p>Perhaps LLMs can help with this too.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>There are guidelines for good design practices</strong></p>
+</div>
+<div class="callout-content">
+<p>Designing R packages involves many difficult decisions.</p>
+<p><strong>Good design</strong> is subjective, but is critically important for your package to be <strong>easy to learn and use</strong>.</p>
+<div class="fragment fade-in">
+<p>The design varies with the package’s purpose, however <a href="https://design.tidyverse.org/">tidyverse design</a> offers four guiding principles:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>human centered</li>
+<li>consistent</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>composable</li>
+<li>inclusive</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- In many senses, a more difficult problem -->
+<!-- Embracing tidyverse design -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ## Efforts to improve forecast before burning it all down and starting again -->
+<!-- * consistency improvements - transformations -->
+<!-- * argument orders for piping, 'tidy'? -->
+<!-- * ggplot support -->
+<!-- Learnt a lot, but some things couldn't be fixed. -->
+
+<img data-src="backgrounds/chris-lee-70l1tDAI6rM-unsplash.jpg" class="image-left r-stretch"></section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<h3 id="design-of-the-forecast-package">Design of the forecast package</h3>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><img data-src="resources/forecast.svg" style="height:160px;float:right;padding-left:10px"></p>
+<ul>
+<li><span class="fragment fade-up" data-fragment-index="1">Forecasting <strong>individual</strong> time series</span></li>
+<li><span class="fragment fade-up" data-fragment-index="2"><strong>Regular</strong> and <strong>infrequent</strong> observations<br> (monthly, quarterly or annually)</span></li>
+<li><span class="fragment fade-up" data-fragment-index="3"><strong>Point forecasts</strong> and <strong>intervals</strong></span></li>
+<li><span class="fragment fade-up" data-fragment-index="4">Consistent with <code>ts</code> models</span></li>
+</ul>
+</div>
+</div>
+</div>
+<h3 id="design-of-the-fable-package">Design of the fable package</h3>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><img data-src="resources/fable.svg" style="height:160px;float:right;padding-left:10px"></p>
+<ul>
+<li><span class="fragment fade-up" data-fragment-index="1">Forecasting <strong>many</strong> time series</span></li>
+<li><span class="fragment fade-up" data-fragment-index="2">Observations at <strong>any time</strong><br> (sub-daily, irregular, monthly, etc.)</span></li>
+<li><span class="fragment fade-up" data-fragment-index="3">Forecast <strong>distributions</strong></span></li>
+<li><span class="fragment fade-up" data-fragment-index="4">Consistent with the <code>tidyverse</code></span></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Both are designed to be easy to use -->
+</div>
+</div>
+<p><img data-src="backgrounds/david-pisnoy-46juD4zY1XA-unsplash.jpg" class="image-right"></p>
+<!-- Show an example of {ts+forecast} usage -->
+<!-- ## Design mistakes of the forecast package -->
+<!-- * forecast output contents ($mean meaning) -->
+<!-- ## Design limitations of the forecast package -->
+<!-- <!-- Designed for individual monthly and quarterly series -->
+<p>–&gt; <!-- <!-- A whole new language for time series, built upon {ts} --> –&gt;</p>
+<!-- * not extensible -->
+</section>
+<section id="section-5" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-data">Design element: data</h3>
+<p>Consider trips to Australia <span class="emoji" data-emoji="australia">🇦🇺</span> <span class="emoji" data-emoji="kangaroo">🦘</span></p>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-3_0b1b6236260bed372f0d044c1d0d3a34">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb1-1" class="hljs-ln-code"><a href="#cb1-1"></a>tourism <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://slides.mitchelloharawild.com/nyr2023/tourism.csv"</span>)</span>
+<span id="cb1-2" class="hljs-ln-code"><a href="#cb1-2"></a>tourism</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-4_491424032ad92778a708314f09f830cb">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 320 x 3
+   Purpose  Quarter    Trips
+   &lt;chr&gt;    &lt;date&gt;     &lt;dbl&gt;
+ 1 Business 1998-01-01 3599.
+ 2 Business 1998-04-01 3724.
+ 3 Business 1998-07-01 4356.
+ 4 Business 1998-10-01 3796.
+ 5 Business 1999-01-01 3335.
+ 6 Business 1999-04-01 4714.
+ 7 Business 1999-07-01 4190.
+ 8 Business 1999-10-01 3701.
+ 9 Business 2000-01-01 3562.
+10 Business 2000-04-01 4018.
+# i 310 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<img data-src="backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg" class="image-left r-stretch" data-id="bg"></section>
+<section id="section-6" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-data-1">Design element: data</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-5_d5caf8363e9b84ad33f2e57b6b2bd60b">
+<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="2-3|4-5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>tourism_ts <span class="ot">&lt;-</span> tourism <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">group_by</span>(Quarter) <span class="sc">|&gt;</span> </span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="fu">summarise</span>(<span class="at">Trips =</span> <span class="fu">sum</span>(Trips)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">pull</span>(Trips) <span class="sc">|&gt;</span> </span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">ts</span>(<span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1998</span>, <span class="dv">1</span>), <span class="at">frequency =</span> <span class="dv">4</span>)</span>
+<span id="cb3-6"><a href="#cb3-6"></a>tourism_ts</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Qtr1     Qtr2     Qtr3     Qtr4
+1998 23182.20 20323.38 19826.64 20830.13
+1999 22087.35 21458.37 19914.19 20027.93
+2000 22339.29 19941.06 20242.83 21427.82
+2001 21522.70 20928.56 20764.42 21036.63
+2002 22346.20 20877.03 21299.14 21864.63
+2003 22061.78 21250.28 20685.21 21045.21
+2004 22949.05 21494.59 20799.52 20364.97
+2005 22534.34 18672.74 18695.80 19311.79
+2006 22517.07 21064.07 18750.97 20533.68
+2007 21691.81 21430.72 20078.19 20362.62
+2008 23274.42 18982.59 19130.62 19321.64
+2009 20102.11 18323.83 18915.86 19104.73
+2010 20135.78 18868.81 19549.09 19778.76
+2011 20266.36 20399.18 20422.86 20123.64
+2012 21923.70 20274.42 19646.08 21557.58
+2013 21984.28 20971.97 20397.09 21338.32
+2014 24278.73 23789.94 22210.87 23950.41
+2015 25023.74 23798.91 23485.75 25140.16
+2016 26660.64 24285.03 24191.32 26347.60
+2017 27496.39 26113.61 26506.31 27593.55</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="resources/forecast.svg" class="sticker-float-right"> <img data-src="backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg" class="image-left" data-id="bg"></p>
+</section>
+<section id="section-7" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-data-2">Design element: data</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-6_ef15b2fe2c4fd86aab7b9dc0989235b0">
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>tourism_ts <span class="ot">&lt;-</span> tourism <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">group_by</span>(Quarter) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">summarise</span>(<span class="at">Trips =</span> <span class="fu">sum</span>(Trips)) <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">pull</span>(Trips) <span class="sc">|&gt;</span> </span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">ts</span>(<span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1998</span>, <span class="dv">1</span>), <span class="at">frequency =</span> <span class="dv">4</span>)</span>
+<span id="cb5-6"><a href="#cb5-6"></a>tourism_ts <span class="sc">|&gt;</span> </span>
+<span id="cb5-7"><a href="#cb5-7"></a>  <span class="fu">window</span>(<span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2012</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Qtr1     Qtr2     Qtr3     Qtr4
+2012          20274.42 19646.08 21557.58
+2013 21984.28 20971.97 20397.09 21338.32
+2014 24278.73 23789.94 22210.87 23950.41
+2015 25023.74 23798.91 23485.75 25140.16
+2016 26660.64 24285.03 24191.32 26347.60
+2017 27496.39 26113.61 26506.31 27593.55</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="resources/forecast.svg" class="sticker-float-right"> <img data-src="backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg" class="image-left" data-id="bg"></p>
+</section>
+<section id="section-8" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-data-3">Design element: data</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-7_9b0f9de90f4284e28a00710ff39c6604">
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="2-5|7-8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>tourism <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="at">names_from =</span> Purpose, </span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="at">values_from =</span> Trips</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="fu">select</span>(<span class="sc">-</span>Quarter) <span class="sc">|&gt;</span> </span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">as.matrix</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">ts</span>(<span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1998</span>, <span class="dv">1</span>), <span class="at">frequency =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-8_e5897c084ddbe0b7a083900a0828f0ad">
+<div class="cell-output cell-output-stdout">
+<pre><code>        Business   Holiday    Other Visiting
+1998 Q1 3598.631 11806.038 679.6751 7097.853
+1998 Q2 3723.660  9275.662 656.2045 6667.853
+1998 Q3 4356.454  8642.489 816.3642 6011.334
+1998 Q4 3795.539  9299.524 668.2381 7066.829
+1999 Q1 3334.554 11172.027 675.0130 6905.760
+1999 Q2 4714.239  9607.613 823.9023 6312.619</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="resources/forecast.svg" class="sticker-float-right"> <img data-src="backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg" class="image-left" data-id="bg"></p>
+</section>
+<section id="section-9" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-data-4">Design element: data</h3>
+<p>The <code>ts</code> data format</p>
+<div class="fragment fade-in">
+<div class="callout callout-pro callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Pros</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Very minimal and efficient</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in">
+<div class="callout callout-con callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Cons</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Doesn’t work well with multiple series and variables</li>
+<li>Limited domain specific functions like <code>window()</code></li>
+<li>Requires regular time series</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="resources/forecast.svg" class="sticker-float-right"> <img data-src="backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg" class="image-left" data-id="bg"></p>
+<!-- ## {} -->
+<!-- ::: columns -->
+<!-- ::: {.column width="40%"} -->
+<!-- ::: -->
+<!-- ::: {.column width="52%"} -->
+<!-- ### Design element: data -->
+<!-- ![](resources/forecast.svg){.sticker-float-right} -->
+<!-- ```{r, include = FALSE} -->
+<!-- options(width = 46) -->
+<!-- ``` -->
+<!-- ```{r, echo = TRUE} -->
+<!-- tourism |>  -->
+<!--   group_by(Region, State, Purpose) |>  -->
+<!--   summarise(Trips = list( -->
+<!--     ts(Trips, start = c(1998, 1), frequency = 4) -->
+<!--   )) -->
+<!-- ``` -->
+<!-- ::: -->
+<!-- ::: -->
+<!-- ![](backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg){.image-left data-id="bg"} -->
+</section>
+<section id="section-10" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-data-5">Design element: data</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-9_a38df1466399de4e62b730d54968ad55">
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="4-7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(tsibble)</span>
+<span id="cb9-2"><a href="#cb9-2"></a>tourism_tsbl <span class="ot">&lt;-</span> tourism <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">mutate</span>(<span class="at">Quarter =</span> <span class="fu">yearquarter</span>(Quarter)) <span class="sc">|&gt;</span> </span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">as_tsibble</span>(</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="at">index =</span> Quarter,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="at">key =</span> Purpose</span>
+<span id="cb9-7"><a href="#cb9-7"></a>  )</span>
+<span id="cb9-8"><a href="#cb9-8"></a>tourism_tsbl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tsibble: 320 x 3 [1Q]
+# Key:       Purpose [4]
+   Purpose  Quarter Trips
+   &lt;chr&gt;      &lt;qtr&gt; &lt;dbl&gt;
+ 1 Business 1998 Q1 3599.
+ 2 Business 1998 Q2 3724.
+ 3 Business 1998 Q3 4356.
+ 4 Business 1998 Q4 3796.
+ 5 Business 1999 Q1 3335.
+ 6 Business 1999 Q2 4714.
+ 7 Business 1999 Q3 4190.
+ 8 Business 1999 Q4 3701.
+ 9 Business 2000 Q1 3562.
+10 Business 2000 Q2 4018.
+# i 310 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="resources/fable.svg" class="sticker-float-right"> <img data-src="backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg" class="image-left" data-id="bg"></p>
+</section>
+<section id="section-11" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-data-6">Design element: data</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-10_0c7ad6b3819cf2269d2cf949026ee02c">
+<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(tsibble)</span>
+<span id="cb11-2"><a href="#cb11-2"></a>tourism_tsbl <span class="ot">&lt;-</span> tourism <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">mutate</span>(<span class="at">Quarter =</span> <span class="fu">yearquarter</span>(Quarter)) <span class="sc">|&gt;</span> </span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">as_tsibble</span>(</span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="at">index =</span> Quarter,</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="at">key =</span> Purpose</span>
+<span id="cb11-7"><a href="#cb11-7"></a>  )</span>
+<span id="cb11-8"><a href="#cb11-8"></a>tourism_tsbl <span class="sc">|&gt;</span> </span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="fu">filter</span>(Quarter <span class="sc">&gt;=</span> <span class="fu">yearquarter</span>(<span class="st">"2012 Q2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tsibble: 92 x 3 [1Q]
+# Key:       Purpose [4]
+   Purpose  Quarter Trips
+   &lt;chr&gt;      &lt;qtr&gt; &lt;dbl&gt;
+ 1 Business 2012 Q2 3746.
+ 2 Business 2012 Q3 4091.
+ 3 Business 2012 Q4 3825.
+ 4 Business 2013 Q1 3099.
+ 5 Business 2013 Q2 4036.
+ 6 Business 2013 Q3 4096.
+ 7 Business 2013 Q4 3704.
+ 8 Business 2014 Q1 3917.
+ 9 Business 2014 Q2 4505.
+10 Business 2014 Q3 4726.
+# i 82 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="resources/fable.svg" class="sticker-float-right"> <img data-src="backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg" class="image-left" data-id="bg"></p>
+</section>
+<section id="section-12" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-data-7">Design element: data</h3>
+<p>The <code>tsibble</code> data format</p>
+<div class="fragment fade-in">
+<div class="callout callout-pro callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Pros</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Works great with multiple series and variables</li>
+<li>Fully compatible with <code>tidyverse</code> functions</li>
+<li>Supports observations at any time and frequency</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in">
+<div class="callout callout-con callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Cons</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Less space efficient</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in">
+<div class="callout callout-tip callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Design for compatibility with <strong>familiar</strong> functions.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="resources/fable.svg" class="sticker-float-right"> <img data-src="backgrounds/sander-weeteling-KABfjuSOx74-unsplash.jpg" class="image-left" data-id="bg"></p>
+</section>
+<section id="section-13" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/forecast.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-models">Design element: models</h3>
+<div class="fragment fade-in">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-11_0d8ab1b7fc2bab85efc44a87f7fce733">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb13-2"><a href="#cb13-2"></a>tourism_ts <span class="sc">|&gt;</span> </span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">ets</span>(<span class="at">model =</span> <span class="st">"AAA"</span>, <span class="at">damped =</span> <span class="cn">FALSE</span>, <span class="at">lambda =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ETS(A,A,A) 
+
+Call:
+ ets(y = tourism_ts, model = "AAA", damped = FALSE, lambda = 0) 
+
+  Box-Cox transformation: lambda= 0 
+
+  Smoothing parameters:
+    alpha = 0.1955 
+    beta  = 0.0339 
+    gamma = 1e-04 
+
+  Initial states:
+    l = 9.9608 
+    b = -0.0024 
+    s = -0.0044 -0.0368 -0.0156 0.0569
+
+  sigma:  0.0421
+
+      AIC      AICc       BIC 
+-146.6778 -144.1064 -125.2396 </code></pre>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Designed with similarity to <code>stats::arima()</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/david-becker-crs2vlkSe98-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-14" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/forecast.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-models-1">Design element: models</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-12_27d689a2cf0cae12211d02e92246f9a9">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">tslm</span>(tourism_ts <span class="sc">~</span> trend <span class="sc">+</span> season, <span class="at">lambda =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+tslm(formula = tourism_ts ~ trend + season, lambda = 0)
+
+Coefficients:
+(Intercept)        trend      season2      season3      season4  
+   9.949594     0.002002    -0.073778    -0.094098    -0.060677  </code></pre>
+</div>
+</div>
+<p><br><br><br><br></p>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Similarity to <code>stats::lm()</code>, but inconsistent with <code>ets()</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/david-becker-crs2vlkSe98-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-15" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/forecast.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-models-2">Design element: models</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-13_cbc8cef48d652cc117dc414c89bf7895">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb17-2"><a href="#cb17-2"></a>tourism_ts <span class="sc">|&gt;</span> </span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">snaive</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95
+2018 Q1       27496.39 25939.94 29052.84 25116.00 29876.78
+2018 Q2       26113.61 24557.15 27670.06 23733.22 28493.99
+2018 Q3       26506.31 24949.86 28062.77 24125.93 28886.70
+2018 Q4       27593.55 26037.10 29150.01 25213.17 29973.94
+2019 Q1       27496.39 25295.23 29697.54 24130.01 30862.77
+2019 Q2       26113.61 23912.45 28314.76 22747.23 29479.98
+2019 Q3       26506.31 24305.16 28707.47 23139.94 29872.69
+2019 Q4       27593.55 25392.40 29794.71 24227.18 30959.93</code></pre>
+</div>
+</div>
+<p><br><br><br></p>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Forecasting <em>methods</em> directly produce forecasts?</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/david-becker-crs2vlkSe98-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-16" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/forecast.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-models-3">Design element: models</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-14_8b196708e8e7850929bbcfd76920771c">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb19-2"><a href="#cb19-2"></a>tourism_ts <span class="sc">|&gt;</span> </span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">stlm</span>(<span class="at">method =</span> <span class="st">"ets"</span>, <span class="at">etsmodel =</span> <span class="st">"AAN"</span>, <span class="at">lambda =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$stl
+             Data     Trend     Seasonal4     Remainder
+1998 Q1 10.051140  9.967165  0.0581990709  0.0257757070
+1998 Q2  9.919527  9.957989 -0.0160347791 -0.0224273863
+1998 Q3  9.894782  9.950423 -0.0351850627 -0.0204563223
+1998 Q4  9.944156  9.946338 -0.0070831761  0.0049004596
+1999 Q1 10.002760  9.955351  0.0582772427 -0.0108677499
+1999 Q2  9.973870  9.952333 -0.0158879849  0.0374252377
+1999 Q3  9.899188  9.946055 -0.0351033714 -0.0117634535
+1999 Q4  9.904883  9.937231 -0.0074922973 -0.0248556206
+2000 Q1 10.014103  9.931819  0.0584048140  0.0238785364
+2000 Q2  9.900536  9.941186 -0.0157054994 -0.0249444137
+2000 Q3  9.915556  9.946715 -0.0350088677  0.0038496856
+2000 Q4  9.972446  9.948842 -0.0079166950  0.0315205013
+2001 Q1  9.976863  9.955009  0.0583114185 -0.0364571537
+2001 Q2  9.948870  9.956874 -0.0153202584  0.0073162086
+2001 Q3  9.940996  9.961713 -0.0345828592  0.0138661220
+2001 Q4  9.954020  9.964387 -0.0086405754 -0.0017258845
+2002 Q1 10.014412  9.965678  0.0581074023 -0.0093743589
+2002 Q2  9.946405  9.974509 -0.0151631262 -0.0129413035
+2002 Q3  9.966422  9.980744 -0.0345228331  0.0202012987
+2002 Q4  9.992626  9.979714 -0.0097784356  0.0226900030
+2003 Q1 10.001602  9.975533  0.0607560274 -0.0346867540
+2003 Q2  9.964125  9.968887 -0.0138166559  0.0090549553
+2003 Q3  9.937174  9.970273 -0.0374536341  0.0043554083
+2003 Q4  9.954428  9.974594 -0.0121012844 -0.0080647323
+2004 Q1 10.041032  9.977493  0.0638928308 -0.0003541052
+2004 Q2  9.975556  9.976568 -0.0122260212  0.0112142539
+2004 Q3  9.942685  9.968629 -0.0404181896  0.0144742303
+2004 Q4  9.921572  9.948876 -0.0146447579 -0.0126590821
+2005 Q1 10.022795  9.917536  0.0702368457  0.0350221651
+2005 Q2  9.834820  9.895508 -0.0143312132 -0.0463570270
+2005 Q3  9.836054  9.886677 -0.0427820746 -0.0078410605
+2005 Q4  9.868471  9.903763 -0.0158888074 -0.0194034963
+2006 Q1 10.022029  9.923484  0.0766329422  0.0219119107
+2006 Q2  9.955324  9.930770 -0.0159237173  0.0404777694
+2006 Q3  9.839001  9.930785 -0.0441138432 -0.0476700342
+2006 Q4  9.929822  9.927773 -0.0158382144  0.0178865010
+2007 Q1  9.984690  9.940975  0.0735216531 -0.0298067192
+2007 Q2  9.972581  9.948763 -0.0173753035  0.0411927700
+2007 Q3  9.907390  9.955155 -0.0394646716 -0.0083006403
+2007 Q4  9.921456  9.950076 -0.0134290746 -0.0151905834
+2008 Q1 10.055110  9.930120  0.0693853151  0.0556043692
+2008 Q2  9.851278  9.913451 -0.0194145386 -0.0427592688
+2008 Q3  9.859046  9.888735 -0.0348498152  0.0051608115
+2008 Q4  9.868981  9.869484 -0.0106535991  0.0101505260
+2009 Q1  9.908580  9.860078  0.0620933157 -0.0135918596
+2009 Q2  9.815957  9.856665 -0.0195679967 -0.0211399817
+2009 Q3  9.847756  9.858547 -0.0303134883  0.0195228202
+2009 Q4  9.857691  9.863173 -0.0079046780  0.0024228746
+2010 Q1  9.910253  9.868034  0.0547420223 -0.0125226434
+2010 Q2  9.845265  9.876858 -0.0200628959 -0.0115298008
+2010 Q3  9.880684  9.884889 -0.0264310028  0.0222258738
+2010 Q4  9.892364  9.893091 -0.0060106199  0.0052832223
+2011 Q1  9.916718  9.905991  0.0506619257 -0.0399349469
+2011 Q2  9.923250  9.917608 -0.0157858902  0.0214274956
+2011 Q3  9.924410  9.930488 -0.0298929000  0.0238156073
+2011 Q4  9.909650  9.936941 -0.0037761398 -0.0235141484
+2012 Q1  9.995324  9.931988  0.0469331642  0.0164025770
+2012 Q2  9.917115  9.934869 -0.0113766064 -0.0063766874
+2012 Q3  9.885633  9.943248 -0.0334902300 -0.0241247613
+2012 Q4  9.978483  9.950020 -0.0018247225  0.0302878451
+2013 Q1  9.998083  9.959047  0.0478976961 -0.0088620163
+2013 Q2  9.950942  9.960944 -0.0124366294  0.0024347654
+2013 Q3  9.923148  9.970353 -0.0356741678 -0.0115314161
+2013 Q4  9.968260  9.997979  0.0006576359 -0.0303767861
+2014 Q1 10.097356 10.029345  0.0488224403  0.0191882382
+2014 Q2 10.077018 10.055107 -0.0135253890  0.0354364231
+2014 Q3 10.008337 10.069867 -0.0378649825 -0.0236654430
+2014 Q4 10.083741 10.073342  0.0031549476  0.0072440371
+2015 Q1 10.127580 10.081556  0.0489142334 -0.0028905205
+2015 Q2 10.077395 10.093661 -0.0138580520 -0.0024073477
+2015 Q3 10.064149 10.107931 -0.0386959618 -0.0050863441
+2015 Q4 10.132222 10.119911  0.0036888551  0.0086216722
+2016 Q1 10.190944 10.125883  0.0492055150  0.0158548462
+2016 Q2 10.097615 10.132884 -0.0140150604 -0.0212537432
+2016 Q3 10.093749 10.143105 -0.0394063214 -0.0099496891
+2016 Q4 10.179133 10.158151  0.0042896310  0.0166915041
+2017 Q1 10.221810 10.177441  0.0494589369 -0.0050898674
+2017 Q2 10.170212 10.194472 -0.0142266497 -0.0100339874
+2017 Q3 10.185138 10.210220 -0.0399205720  0.0148389410
+2017 Q4 10.225337 10.226500  0.0047578144 -0.0059204865
+
+$model
+ETS(A,A,N) 
+
+Call:
+ ets(y = x, model = etsmodel, allow.multiplicative.trend = allow.multiplicative.trend) 
+
+  Smoothing parameters:
+    alpha = 0.4956 
+    beta  = 0.0391 
+
+  Initial states:
+    l = 9.9659 
+    b = -0.0012 
+
+  sigma:  0.0361
+
+      AIC      AICc       BIC 
+-174.7627 -173.9519 -162.8526 
+
+$modelfunction
+function (x, ...) 
+{
+    return(ets(x, model = etsmodel, allow.multiplicative.trend = allow.multiplicative.trend, 
+        ...))
+}
+&lt;bytecode: 0x558f8b932e20&gt;
+&lt;environment: 0x558f8b9355c8&gt;
+
+$lambda
+[1] 0
+attr(,"biasadj")
+[1] FALSE
+
+$x
+         Qtr1     Qtr2     Qtr3     Qtr4
+1998 23182.20 20323.38 19826.64 20830.13
+1999 22087.35 21458.37 19914.19 20027.93
+2000 22339.29 19941.06 20242.83 21427.82
+2001 21522.70 20928.56 20764.42 21036.63
+2002 22346.20 20877.03 21299.14 21864.63
+2003 22061.78 21250.28 20685.21 21045.21
+2004 22949.05 21494.59 20799.52 20364.97
+2005 22534.34 18672.74 18695.80 19311.79
+2006 22517.07 21064.07 18750.97 20533.68
+2007 21691.81 21430.72 20078.19 20362.62
+2008 23274.42 18982.59 19130.62 19321.64
+2009 20102.11 18323.83 18915.86 19104.73
+2010 20135.78 18868.81 19549.09 19778.76
+2011 20266.36 20399.18 20422.86 20123.64
+2012 21923.70 20274.42 19646.08 21557.58
+2013 21984.28 20971.97 20397.09 21338.32
+2014 24278.73 23789.94 22210.87 23950.41
+2015 25023.74 23798.91 23485.75 25140.16
+2016 26660.64 24285.03 24191.32 26347.60
+2017 27496.39 26113.61 26506.31 27593.55
+
+$series
+[1] "tourism_ts"
+
+$m
+[1] 4
+
+$fitted
+         Qtr1     Qtr2     Qtr3     Qtr4
+1998 22536.38 21217.04 20339.25 20598.74
+1999 22060.48 20449.02 20536.20 20758.37
+2000 21716.77 20411.02 19735.37 20496.68
+2001 22385.69 20362.30 20236.05 21044.49
+2002 22502.92 20844.32 20465.29 21435.73
+2003 23288.96 21052.77 20673.22 21227.93
+2004 22817.53 21220.85 20787.89 21363.21
+2005 22696.60 20763.32 19050.50 19276.44
+2006 21043.57 19776.73 19825.38 19783.42
+2007 22006.16 19913.65 20220.18 20695.80
+2008 22304.16 20880.41 19573.28 19769.50
+2009 20941.87 18810.70 18252.05 18904.09
+2010 20139.01 18600.16 18538.79 19387.21
+2011 20697.43 19127.42 19480.71 20518.01
+2012 21412.87 20488.94 19978.64 20480.28
+2013 22154.62 20843.48 20496.30 21271.69
+2014 22430.45 22059.31 22560.54 23529.37
+2015 25084.74 23751.54 23411.83 24698.84
+2016 26345.82 25146.05 24322.61 25573.86
+2017 27435.21 26040.40 25683.79 27602.49
+
+$residuals
+              Qtr1          Qtr2          Qtr3          Qtr4
+1998  0.0282539261 -0.0430326292 -0.0255261996  0.0111706003
+1999  0.0012175381  0.0481797702 -0.0307565416 -0.0358221573
+2000  0.0282623642 -0.0232940678  0.0253881677  0.0444274626
+2001 -0.0393138493  0.0274296008  0.0257752932 -0.0003738740
+2002 -0.0069889511  0.0015680240  0.0399364882  0.0198112653
+2003 -0.0541329304  0.0093377306  0.0005799431 -0.0086449034
+2004  0.0057477082  0.0128169071  0.0005591880 -0.0478535825
+2005 -0.0071748037 -0.1061233565 -0.0187942547  0.0018322177
+2006  0.0676786001  0.0630628559 -0.0557170719  0.0372218549
+2007 -0.0143874004  0.0734200625 -0.0070467575 -0.0162298304
+2008  0.0425814515 -0.0952893005 -0.0228747387 -0.0229146424
+2009 -0.0409258921 -0.0262238998  0.0357235973  0.0105577944
+2010 -0.0001608227  0.0143399016  0.0530638022  0.0199949536
+2011 -0.0210470543  0.0643719747  0.0472304602 -0.0194078810
+2012  0.0235762334 -0.0105249496 -0.0167857264  0.0512651882
+2013 -0.0077184478  0.0061456266 -0.0048520194  0.0031274478
+2014  0.0791816072  0.0755283504 -0.0156203964  0.0177359402
+2015 -0.0024347349  0.0019926648  0.0031523290  0.0177105339
+2016  0.0118784950 -0.0348406942 -0.0054125924  0.0298063423
+2017  0.0022274199  0.0028073792  0.0315231317 -0.0003238353
+
+attr(,"class")
+[1] "stlm"</code></pre>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Limited flexibility for specifying models of models.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/david-becker-crs2vlkSe98-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-17" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/fable.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-models-4">Design element: models</h3>
+<div class="cell" data-hash="index_cache/revealjs/fable_ff99c913778f1ecaae7f1a51abe285f0">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">library</span>(fable)</span>
+<span id="cb21-2"><a href="#cb21-2"></a>tourism_tsbl <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">model</span>(</span>
+<span id="cb21-4"><a href="#cb21-4"></a>    <span class="at">ets =</span> <span class="fu">ETS</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>)),</span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="at">lm =</span> <span class="fu">TSLM</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">trend</span>() <span class="sc">+</span> <span class="fu">season</span>()),</span>
+<span id="cb21-6"><a href="#cb21-6"></a>    <span class="at">snaive =</span> <span class="fu">SNAIVE</span>(Trips)</span>
+<span id="cb21-7"><a href="#cb21-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A mable: 4 x 4
+# Key:     Purpose [4]
+  Purpose           ets      lm   snaive
+  &lt;chr&gt;         &lt;model&gt; &lt;model&gt;  &lt;model&gt;
+1 Business &lt;ETS(A,A,A)&gt;  &lt;TSLM&gt; &lt;SNAIVE&gt;
+2 Holiday  &lt;ETS(A,A,A)&gt;  &lt;TSLM&gt; &lt;SNAIVE&gt;
+3 Other    &lt;ETS(A,A,A)&gt;  &lt;TSLM&gt; &lt;SNAIVE&gt;
+4 Visiting &lt;ETS(A,A,A)&gt;  &lt;TSLM&gt; &lt;SNAIVE&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/david-becker-crs2vlkSe98-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-18" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/fable.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-models-5">Design element: models</h3>
+<div class="cell" data-hash="index_cache/revealjs/fable-dcmp_20aee56801ecfef2851a4f06e1da4794">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">library</span>(feasts)</span>
+<span id="cb23-2"><a href="#cb23-2"></a>tourism_tsbl <span class="sc">|&gt;</span> </span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">model</span>(</span>
+<span id="cb23-4"><a href="#cb23-4"></a>    <span class="at">stlm =</span> <span class="fu">decomposition_model</span>(</span>
+<span id="cb23-5"><a href="#cb23-5"></a>      <span class="fu">STL</span>(<span class="fu">log</span>(Trips <span class="sc">+</span> <span class="dv">1</span>)),</span>
+<span id="cb23-6"><a href="#cb23-6"></a>      <span class="fu">ETS</span>(season_adjust <span class="sc">~</span> <span class="fu">season</span>(<span class="st">"N"</span>))</span>
+<span id="cb23-7"><a href="#cb23-7"></a>    )</span>
+<span id="cb23-8"><a href="#cb23-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A mable: 4 x 2
+# Key:     Purpose [4]
+  Purpose                       stlm
+  &lt;chr&gt;                      &lt;model&gt;
+1 Business &lt;STL decomposition model&gt;
+2 Holiday  &lt;STL decomposition model&gt;
+3 Other    &lt;STL decomposition model&gt;
+4 Visiting &lt;STL decomposition model&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/david-becker-crs2vlkSe98-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-19" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/fable.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-models-6">Design element: models</h3>
+<div class="callout callout-note callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key differences</strong></p>
+</div>
+<div class="callout-content">
+<p>Improving upon forecast, the fable package…</p>
+<ul>
+<li><span class="fragment fade-in">applies a <strong>consistent</strong> <code>y~x</code> model <strong>interface</strong></span></li>
+<li><span class="fragment fade-in"><strong>separates</strong> model <strong>specification</strong> from model <strong>fitting</strong></span></li>
+<li><span class="fragment fade-in">allows <strong>any</strong> combination of decomposition &amp; model</span></li>
+</ul>
+</div>
+</div>
+</div>
+<p><br><br></p>
+<div class="fragment fade-in">
+<div class="callout callout-tip callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Design <strong>consistent</strong> interfaces with <strong>small components</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- * (+ transformations) - smaller parts + consistency -->
+<!-- * stl forecasting -->
+<!-- * model spec+output inconsistency -->
+</div>
+</div>
+<p><img data-src="backgrounds/david-becker-crs2vlkSe98-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-20" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<p><img data-src="resources/forecast.svg" class="sticker-float-right"></p>
+<h3 id="design-element-accuracy">Design element: accuracy</h3>
+<div class="fragment fade-in">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-15_d70c394cbdd3281ed4203825767c3998">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>tourism_ts <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">ets</span>(<span class="at">model =</span> <span class="st">"AAA"</span>, <span class="at">damped =</span> <span class="cn">FALSE</span>, <span class="at">lambda =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">accuracy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   ME     RMSE      MAE      MPE     MAPE     MASE      ACF1
+Training set 134.8174 830.1815 630.1936 0.521835 2.987902 0.663863 0.2877198</code></pre>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-16_baa6585e562083c06ad95e6b0185c4fb">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">tslm</span>(tourism_ts <span class="sc">~</span> trend <span class="sc">+</span> season, <span class="at">lambda =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">accuracy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   ME     RMSE      MAE        MPE     MAPE     MASE      ACF1
+Training set 66.44326 1705.298 1414.536 -0.2979822 6.532366 1.490111 0.8119145</code></pre>
+</div>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-in">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-17_fac14f31804ae0b33e8d473fc206f044">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>tourism_ts <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">snaive</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3"></a>  <span class="fu">accuracy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   ME     RMSE      MAE      MPE     MAPE MASE      ACF1
+Training set 309.8357 1214.506 949.2825 1.147917 4.380119    1 0.3578434</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg" class="image-left"></p>
+</section>
+<section id="section-21" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-accuracy-1">Design element: accuracy</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-18_00f05f1f5448d1d11320f695c11d1e16">
+<div class="sourceCode cell-code" id="cb31" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>tourism_tsbl <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>  <span class="fu">summarise</span>(<span class="at">Trips =</span> <span class="fu">sum</span>(Trips)) <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="fu">model</span>(</span>
+<span id="cb31-4"><a href="#cb31-4"></a>    <span class="at">ets =</span> <span class="fu">ETS</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>)),</span>
+<span id="cb31-5"><a href="#cb31-5"></a>    <span class="at">lm =</span> <span class="fu">TSLM</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">trend</span>() <span class="sc">+</span> <span class="fu">season</span>()),</span>
+<span id="cb31-6"><a href="#cb31-6"></a>    <span class="at">snaive =</span> <span class="fu">SNAIVE</span>(Trips)</span>
+<span id="cb31-7"><a href="#cb31-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A mable: 1 x 3
+           ets      lm   snaive
+       &lt;model&gt; &lt;model&gt;  &lt;model&gt;
+1 &lt;ETS(A,A,A)&gt;  &lt;TSLM&gt; &lt;SNAIVE&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg" class="image-left"> <img data-src="resources/fable.svg" class="sticker-float-right"></p>
+</section>
+<section id="section-22" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-accuracy-2">Design element: accuracy</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-19_b91097ecd426af7335b6446cff7b7f4a">
+<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>tourism_tsbl <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>  <span class="fu">summarise</span>(<span class="at">Trips =</span> <span class="fu">sum</span>(Trips)) <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>  <span class="fu">model</span>(</span>
+<span id="cb33-4"><a href="#cb33-4"></a>    <span class="at">ets =</span> <span class="fu">ETS</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>)),</span>
+<span id="cb33-5"><a href="#cb33-5"></a>    <span class="at">lm =</span> <span class="fu">TSLM</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">trend</span>() <span class="sc">+</span> <span class="fu">season</span>()),</span>
+<span id="cb33-6"><a href="#cb33-6"></a>    <span class="at">snaive =</span> <span class="fu">SNAIVE</span>(Trips)</span>
+<span id="cb33-7"><a href="#cb33-7"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb33-8"><a href="#cb33-8"></a>  <span class="fu">accuracy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 x 10
+  .model .type       ME  RMSE   MAE    MPE  MAPE  MASE RMSSE  ACF1
+  &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 ets    Training 134.   830.  630.  0.519  2.99 0.664 0.684 0.288
+2 lm     Training  66.4 1705. 1415. -0.298  6.53 1.49  1.40  0.812
+3 snaive Training 310.  1215.  949.  1.15   4.38 1     1     0.358</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg" class="image-left"> <img data-src="resources/fable.svg" class="sticker-float-right"></p>
+</section>
+<section id="section-23" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-accuracy-3">Design element: accuracy</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-20_1efb338a5a86ae7c551efc288c2dd512">
+<div class="sourceCode cell-code" id="cb35" data-code-line-numbers="1-3,11|5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>med_abs_e <span class="ot">&lt;-</span> <span class="cf">function</span>(.resid, ...){</span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">median</span>(<span class="fu">abs</span>(.resid), <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb35-3"><a href="#cb35-3"></a>}</span>
+<span id="cb35-4"><a href="#cb35-4"></a>tourism_tsbl <span class="sc">|&gt;</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>  <span class="fu">summarise</span>(<span class="at">Trips =</span> <span class="fu">sum</span>(Trips)) <span class="sc">|&gt;</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a>  <span class="fu">model</span>(</span>
+<span id="cb35-7"><a href="#cb35-7"></a>    <span class="at">ets =</span> <span class="fu">ETS</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>)),</span>
+<span id="cb35-8"><a href="#cb35-8"></a>    <span class="at">lm =</span> <span class="fu">TSLM</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">trend</span>() <span class="sc">+</span> <span class="fu">season</span>()),</span>
+<span id="cb35-9"><a href="#cb35-9"></a>    <span class="at">snaive =</span> <span class="fu">SNAIVE</span>(Trips)</span>
+<span id="cb35-10"><a href="#cb35-10"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb35-11"><a href="#cb35-11"></a>  <span class="fu">accuracy</span>(<span class="at">measures =</span> <span class="fu">lst</span>(med_abs_e))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 x 3
+  .model .type    med_abs_e
+  &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt;
+1 ets    Training      481.
+2 lm     Training     1233.
+3 snaive Training      809.</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg" class="image-left"> <img data-src="resources/fable.svg" class="sticker-float-right"></p>
+</section>
+<section id="section-24" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-accuracy-4">Design element: accuracy</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-21_d72ed355c291ace3c1ec5258239df773">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>med_abs_e <span class="ot">&lt;-</span> <span class="cf">function</span>(.resid, ...){</span>
+<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">median</span>(<span class="fu">abs</span>(.resid), <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb37-3"><a href="#cb37-3"></a>}</span>
+<span id="cb37-4"><a href="#cb37-4"></a>tourism_tsbl <span class="sc">|&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5"></a>  <span class="fu">model</span>(</span>
+<span id="cb37-6"><a href="#cb37-6"></a>    <span class="at">ets =</span> <span class="fu">ETS</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>)),</span>
+<span id="cb37-7"><a href="#cb37-7"></a>    <span class="at">lm =</span> <span class="fu">TSLM</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">trend</span>() <span class="sc">+</span> <span class="fu">season</span>()),</span>
+<span id="cb37-8"><a href="#cb37-8"></a>    <span class="at">snaive =</span> <span class="fu">SNAIVE</span>(Trips)</span>
+<span id="cb37-9"><a href="#cb37-9"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb37-10"><a href="#cb37-10"></a>  <span class="fu">accuracy</span>(<span class="at">measures =</span> <span class="fu">lst</span>(med_abs_e))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 x 4
+   Purpose  .model .type    med_abs_e
+   &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt;
+ 1 Business ets    Training     172. 
+ 2 Business lm     Training     375. 
+ 3 Business snaive Training     225. 
+ 4 Holiday  ets    Training     223. 
+ 5 Holiday  lm     Training     387. 
+ 6 Holiday  snaive Training     329. 
+ 7 Other    ets    Training      71.4
+ 8 Other    lm     Training     128. 
+ 9 Other    snaive Training      95.6
+10 Visiting ets    Training     233. 
+11 Visiting lm     Training     462. 
+12 Visiting snaive Training     351. </code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg" class="image-left"> <img data-src="resources/fable.svg" class="sticker-float-right"></p>
+</section>
+<section id="section-25" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-accuracy-5">Design element: accuracy</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-22_366e4d835259992e6a8668efce07fe0d">
+<div class="sourceCode cell-code" id="cb39" data-code-line-numbers="11-12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>med_abs_e <span class="ot">&lt;-</span> <span class="cf">function</span>(.resid, ...){</span>
+<span id="cb39-2"><a href="#cb39-2"></a>  <span class="fu">median</span>(<span class="fu">abs</span>(.resid), <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb39-3"><a href="#cb39-3"></a>}</span>
+<span id="cb39-4"><a href="#cb39-4"></a>tourism_tsbl <span class="sc">|&gt;</span></span>
+<span id="cb39-5"><a href="#cb39-5"></a>  <span class="fu">model</span>(</span>
+<span id="cb39-6"><a href="#cb39-6"></a>    <span class="at">ets =</span> <span class="fu">ETS</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>)),</span>
+<span id="cb39-7"><a href="#cb39-7"></a>    <span class="at">lm =</span> <span class="fu">TSLM</span>(<span class="fu">log</span>(Trips<span class="sc">+</span><span class="dv">1</span>) <span class="sc">~</span> <span class="fu">trend</span>() <span class="sc">+</span> <span class="fu">season</span>()),</span>
+<span id="cb39-8"><a href="#cb39-8"></a>    <span class="at">snaive =</span> <span class="fu">SNAIVE</span>(Trips)</span>
+<span id="cb39-9"><a href="#cb39-9"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb39-10"><a href="#cb39-10"></a>  <span class="fu">accuracy</span>(<span class="at">measures =</span> <span class="fu">lst</span>(med_abs_e)) <span class="sc">|&gt;</span> </span>
+<span id="cb39-11"><a href="#cb39-11"></a>  <span class="fu">group_by</span>(.model) <span class="sc">|&gt;</span> </span>
+<span id="cb39-12"><a href="#cb39-12"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(med_abs_e))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 x 2
+  .model `mean(med_abs_e)`
+  &lt;chr&gt;              &lt;dbl&gt;
+1 ets                 175.
+2 lm                  338.
+3 snaive              250.</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg" class="image-left"> <img data-src="resources/fable.svg" class="sticker-float-right"></p>
+</section>
+<section id="section-26" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+
+</div><div class="column" style="width:60%;">
+<h3 id="design-element-accuracy-6">Design element: accuracy</h3>
+<div class="callout callout-note callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key differences</strong></p>
+</div>
+<div class="callout-content">
+<p>Improving upon forecast, the fable package…</p>
+<ul>
+<li><span class="fragment fade-in">easily <strong>compares accuracy</strong> across models and series</span></li>
+<li><span class="fragment fade-in">supports <strong>custom functions</strong> for accuracy metrics</span></li>
+</ul>
+</div>
+</div>
+</div>
+<p><br><br></p>
+<div class="fragment fade-in">
+<div class="callout callout-tip callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Design <strong>extensible</strong> elements for generic functions.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<img data-src="backgrounds/kasia-gajek-UMne1WKuesY-unsplash.jpg" class="image-left r-stretch"></section>
+<section id="section-27" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/forecast.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-forecasts">Design element: forecasts</h3>
+<div class="fragment fade-in">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-23_ddf8896f8a04021736ff24efbabbb588">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb41-2"><a href="#cb41-2"></a>tourism_ts <span class="sc">|&gt;</span> </span>
+<span id="cb41-3"><a href="#cb41-3"></a>  <span class="fu">ets</span>(<span class="at">model =</span> <span class="st">"AAA"</span>, <span class="at">damped =</span> <span class="cn">FALSE</span>, <span class="at">lambda =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb41-4"><a href="#cb41-4"></a>  <span class="fu">forecast</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95
+2018 Q1       29567.60 28014.39 31206.92 27225.48 32111.20
+2018 Q2       27887.75 26385.76 29475.24 25623.69 30351.86
+2018 Q3       27685.96 26147.87 29314.54 25368.54 30215.08
+2018 Q4       28999.64 27328.14 30773.38 26482.66 31755.85
+2019 Q1       31266.10 29386.46 33265.96 28437.63 34375.90
+2019 Q2       29489.76 27632.34 31472.02 26696.93 32574.75
+2019 Q3       29276.38 27337.34 31352.95 26363.41 32511.20
+2019 Q4       30665.52 28523.76 32968.09 27451.22 34256.18</code></pre>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Provides point forecasts and intervals.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-28" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/forecast.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-forecasts-1">Design element: forecasts</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-24_a81dc3ba2a116cb132b026fdfa8bc680">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb43-2"><a href="#cb43-2"></a>tourism_ts <span class="sc">|&gt;</span> </span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">ets</span>(<span class="at">model =</span> <span class="st">"AAA"</span>, <span class="at">damped =</span> <span class="cn">FALSE</span>, <span class="at">lambda =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb43-4"><a href="#cb43-4"></a>  <span class="fu">forecast</span>(<span class="at">level =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">75</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Point Forecast    Lo 50    Hi 50    Lo 75    Hi 75
+2018 Q1       29567.60 28739.69 30419.35 28169.58 31035.00
+2018 Q2       27887.75 27086.89 28712.30 26535.74 29308.65
+2018 Q3       27685.96 26865.50 28531.48 26301.32 29143.50
+2018 Q4       28999.64 28107.55 29920.04 27494.74 30586.91
+2019 Q1       31266.10 30262.32 32303.18 29573.59 33055.48
+2019 Q2       29489.76 28497.13 30516.95 27817.00 31263.11
+2019 Q3       29276.38 28239.29 30351.54 27529.80 31133.76
+2019 Q4       30665.52 29518.98 31856.59 28735.97 32724.63</code></pre>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Changing the intervals recomputes the forecasts</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-29" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/forecast.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-forecasts-2">Design element: forecasts</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-25_1a9318a035da26af08bd8a2f47d0266a">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb45-2"><a href="#cb45-2"></a>fc <span class="ot">&lt;-</span> tourism_ts <span class="sc">|&gt;</span> </span>
+<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">ets</span>(<span class="at">model =</span> <span class="st">"AAA"</span>, <span class="at">damped =</span> <span class="cn">FALSE</span>, <span class="at">lambda =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">forecast</span>(<span class="at">level =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">75</span>))</span>
+<span id="cb45-5"><a href="#cb45-5"></a>fc<span class="sc">$</span>mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Qtr1     Qtr2     Qtr3     Qtr4
+2018 29567.60 27887.75 27685.96 28999.64
+2019 31266.10 29489.76 29276.38 30665.52</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-26_9f20727b7c4a15c870d64b1f0a8e2d99">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>fc<span class="sc">$</span>upper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-27_5f4213abe90f67a7de49bdf22e772693">
+<div class="cell-output cell-output-stdout">
+<pre><code>             50%      75%
+2018 Q1 30274.12 30851.61
+2018 Q2 28453.29 29062.86</code></pre>
+</div>
+</div>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-28_4d56e84daff97896b7b739f8d213d31d">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>fc<span class="sc">$</span>lower</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-29_8e29a6f724758b82703f2164f1e1f6a6">
+<div class="cell-output cell-output-stdout">
+<pre><code>             50%      75%
+2018 Q1 28695.10 28157.97
+2018 Q2 26793.87 26231.88</code></pre>
+</div>
+</div>
+<div class="fragment fade-in">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>The forecast mean is in <code>$mean</code>… or is it?</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-30" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/forecast.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-forecasts-3">Design element: forecasts</h3>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-30_217d496d785f61a0fa914c33d6d9f14b">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb51-2"><a href="#cb51-2"></a>fc <span class="ot">&lt;-</span> tourism_ts <span class="sc">|&gt;</span> </span>
+<span id="cb51-3"><a href="#cb51-3"></a>  <span class="fu">ets</span>(<span class="at">model =</span> <span class="st">"AAA"</span>, <span class="at">damped =</span> <span class="cn">FALSE</span>, <span class="at">lambda =</span> <span class="dv">0</span>, <span class="at">biasadj =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb51-4"><a href="#cb51-4"></a>  <span class="fu">forecast</span>(<span class="at">level =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">75</span>))</span>
+<span id="cb51-5"><a href="#cb51-5"></a>fc<span class="sc">$</span>mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Qtr1     Qtr2     Qtr3     Qtr4
+2018 29593.81 27913.78 27713.50 29030.76
+2019 31302.69 29527.75 29318.23 30714.46</code></pre>
+</div>
+</div>
+<p><br><br></p>
+<div class="fragment fade-in">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>The transformation has skewed the distribution, and <code>$mean</code> is now actually the forecast distribution’s <strong>median</strong>!</p>
+<p>To obtain the <strong>mean</strong>, set <code>biasadj = TRUE</code>. Huh?!</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-31" class="slide level2 fragment-remove">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/fable.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-forecasts-4">Design element: forecasts</h3>
+<div class="fragment fade-out" data-fragment-index="1">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-31_109d7d9277d1ce8d8d76b6dcd2220d62">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>fc <span class="ot">&lt;-</span> tourism_tsbl <span class="sc">|&gt;</span> </span>
+<span id="cb53-2"><a href="#cb53-2"></a>  <span class="fu">model</span>(</span>
+<span id="cb53-3"><a href="#cb53-3"></a>    <span class="at">ets =</span> <span class="fu">ETS</span>(<span class="fu">log</span>(Trips <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">~</span> <span class="fu">error</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">trend</span>(<span class="st">"A"</span>) <span class="sc">+</span> <span class="fu">season</span>(<span class="st">"A"</span>))</span>
+<span id="cb53-4"><a href="#cb53-4"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb53-5"><a href="#cb53-5"></a>  <span class="fu">forecast</span>()</span>
+<span id="cb53-6"><a href="#cb53-6"></a>fc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-32_34ecbf2ef08626c1c49133d431096940">
+<div class="cell-output cell-output-stdout">
+<pre><code># A fable: 32 x 5 [1Q]
+# Key:     Purpose, .model [4]
+   Purpose  .model Quarter             Trips  .mean
+   &lt;chr&gt;    &lt;chr&gt;    &lt;qtr&gt;            &lt;dist&gt;  &lt;dbl&gt;
+ 1 Business ets    2018 Q1 t(N(8.5, 0.0054))  4855.
+ 2 Business ets    2018 Q2 t(N(8.7, 0.0064))  5920.
+ 3 Business ets    2018 Q3 t(N(8.8, 0.0075))  6440.
+ 4 Business ets    2018 Q4 t(N(8.7, 0.0087))  6057.
+ 5 Business ets    2019 Q1   t(N(8.5, 0.01))  5169.
+ 6 Business ets    2019 Q2  t(N(8.7, 0.012))  6305.
+ 7 Business ets    2019 Q3  t(N(8.8, 0.013))  6861.
+ 8 Business ets    2019 Q4  t(N(8.8, 0.015))  6455.
+ 9 Holiday  ets    2018 Q1 t(N(9.5, 0.0021)) 13413.
+10 Holiday  ets    2018 Q2 t(N(9.3, 0.0024)) 11304.
+# i 22 more rows</code></pre>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-up" data-fragment-index="1">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>fable returns a data frame containing <strong>forecast distributions</strong></p>
+<div class="fragment fade-in" data-fragment-index="2">
+<p>Yes, <code>$.mean</code> contains the distribution’s <strong>mean</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-32" class="slide level2 fragment-remove">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><img data-src="resources/fable.svg" class="sticker-float-midright"></p>
+<h3 id="design-element-forecasts-5">Design element: forecasts</h3>
+<div class="fragment fade-out" data-fragment-index="1">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-33_0261134069d831f865b84812321b67f5">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>fc <span class="sc">|&gt;</span> </span>
+<span id="cb55-2"><a href="#cb55-2"></a>  <span class="fu">select</span>(<span class="sc">-</span>.model) <span class="sc">|&gt;</span> </span>
+<span id="cb55-3"><a href="#cb55-3"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb55-4"><a href="#cb55-4"></a>    <span class="at">.mean =</span> <span class="fu">mean</span>(Trips),</span>
+<span id="cb55-5"><a href="#cb55-5"></a>    <span class="at">.median =</span> <span class="fu">median</span>(Trips),</span>
+<span id="cb55-6"><a href="#cb55-6"></a>    <span class="at">.int95 =</span> <span class="fu">hilo</span>(Trips, <span class="dv">95</span>)</span>
+<span id="cb55-7"><a href="#cb55-7"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-34_a64960223df8918e9d7537d178dde703">
+<div class="cell-output cell-output-stdout">
+<pre><code># A fable: 32 x 6 [1Q]
+# Key:     Purpose [4]
+   Purpose  Quarter             Trips  .mean .median                   .int95
+   &lt;chr&gt;      &lt;qtr&gt;            &lt;dist&gt;  &lt;dbl&gt;   &lt;dbl&gt;                   &lt;hilo&gt;
+ 1 Business 2018 Q1 t(N(8.5, 0.0054))  4855.   4842. [ 4190.526,  5594.409]95
+ 2 Business 2018 Q2 t(N(8.7, 0.0064))  5920.   5901. [ 5045.407,  6900.993]95
+ 3 Business 2018 Q3 t(N(8.8, 0.0075))  6440.   6416. [ 5416.630,  7599.586]95
+ 4 Business 2018 Q4 t(N(8.7, 0.0087))  6057.   6031. [ 5024.229,  7238.677]95
+ 5 Business 2019 Q1   t(N(8.5, 0.01))  5169.   5144. [ 4226.427,  6259.683]95
+ 6 Business 2019 Q2  t(N(8.7, 0.012))  6305.   6268. [ 5077.670,  7738.282]95
+ 7 Business 2019 Q3  t(N(8.8, 0.013))  6861.   6816. [ 5440.190,  8538.972]95
+ 8 Business 2019 Q4  t(N(8.8, 0.015))  6455.   6406. [ 5036.361,  8149.156]95
+ 9 Holiday  2018 Q1 t(N(9.5, 0.0021)) 13413.  13398. [12245.339, 14660.128]95
+10 Holiday  2018 Q2 t(N(9.3, 0.0024)) 11304.  11290. [10248.820, 12436.944]95
+# i 22 more rows</code></pre>
+</div>
+</div>
+<p><br></p>
+<div class="fragment fade-up" data-fragment-index="1">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Distributions can be computed on. Calculate the <code>mean()</code>, <code>median()</code>, <code>hilo()</code>, <code>quantile()</code>, <code>cdf()</code> and more.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><img data-src="backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg" class="image-right"></p>
+</section>
+<section id="section-33" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<h3 id="design-element-forecasts-6">Design element: forecasts</h3>
+<div class="callout callout-note callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Key differences</strong></p>
+</div>
+<div class="callout-content">
+<p>Improving upon forecast, the fable package…</p>
+<ul>
+<li><span class="fragment fade-in">produces <strong>forecast distributions</strong></span></li>
+<li><span class="fragment fade-in">returns a data frame, ready for further tidyverse use</span></li>
+<li><span class="fragment fade-in">avoids confusing terms like <code>biasadj</code> for <code>$mean</code></span></li>
+</ul>
+</div>
+</div>
+</div>
+<p><br><br></p>
+<div class="fragment fade-in">
+<div class="callout callout-tip callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Use <strong>simple</strong> and <strong>descriptive</strong> input and output <strong>names</strong>.</p>
+<p>Produce helpful <strong>outputs</strong> that are <strong>ready to use</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ## The payoff -->
+<!-- Show some wildly general things you can do with fable. -->
+<!-- * <https://stackoverflow.com/questions/58283490> -->
+<!-- * no limits, reconcile an ensemble of decomposition forecasts. -->
+<img data-src="backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg" class="image-right r-stretch"></section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="fragment fade-in">
+<div class="callout callout-note callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Design principles</strong></p>
+</div>
+<div class="callout-content">
+<p>Recall the tidyverse design principles,</p>
+<div class="columns" style="display:inline-block;width:600px">
+<div class="column" style="width:50%;">
+<ul>
+<li>human centered</li>
+<li>consistent</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>composable</li>
+<li>inclusive</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in">
+<div class="callout callout-tip callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Design tips</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Build upon existing <strong>familiar</strong> functions to users</li>
+<li>Be internally and externally <strong>consistent</strong></li>
+<li>Break the problem into <strong>small building blocks</strong></li>
+<li>Use <strong>simple</strong> and <strong>descriptive names</strong>.</li>
+<li>Produce helpful <strong>outputs</strong> that are <strong>ready to use</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<img data-src="backgrounds/max-saeling-_CGxNOLM1gQ-unsplash.jpg" class="image-right r-stretch"></section>
 <section id="thanks-for-your-time" class="slide level2">
 <h2>Thanks for your time!</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
+<div class="callout callout-tip callout-captioned callout-style-simple">
+<div class="callout-body">
+<div class="callout-caption">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Final remarks</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Think about the design of packages you make or use.</li>
+<li>Try forecasting with fable, it’s easy by design!</li>
+<li>Let’s chat during the break - especially if it’s about about software, teaching, forecasting or permaculture.</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="callout callout-link callout-captioned callout-style-simple">
 <div class="callout-body">
 <div class="callout-caption">
@@ -380,7 +2107,8 @@
 </div>
 </div>
 </div>
-<!-- ![](backgrounds/){.image-right} -->
+<p><img data-src="backgrounds/max-saeling-_CGxNOLM1gQ-unsplash.jpg" class="image-right"></p>
+<!-- Made with :heart: and [Quarto](https://quarto.org/). -->
 </section>
 <section id="unsplash-credits" class="slide level2">
 <h2>Unsplash credits</h2>
@@ -395,6 +2123,23 @@
 <div class="callout-content">
 <div class="cell" data-hash="index_cache/revealjs/unsplash_0291571fab3d266b79a79cb254a4841f">
 <div class="cell-output-display">
+<ul>
+<li>amjd rdwan: <a href="https://unsplash.com/photos/-MDJDYKQz6E">beautiful colors</a></li>
+<li>Balint Mendlik: <a href="https://unsplash.com/photos/4-ORHffEh3I">Photo</a></li>
+<li>Cederic Vandenberghe: <a href="https://unsplash.com/photos/21DP3hytVHw">We went to Germany for one day to explor…</a></li>
+<li>Chris Lee: <a href="https://unsplash.com/photos/70l1tDAI6rM">Behind the leaves.</a></li>
+<li>David Becker: <a href="https://unsplash.com/photos/6rWCc5h7Y7o">I took this picture back in 2014 with my Nexus 5…</a></li>
+<li>David Becker: <a href="https://unsplash.com/photos/crs2vlkSe98">This was one of my first startrails. I took abou…</a></li>
+<li>David Pisnoy: <a href="https://unsplash.com/photos/46juD4zY1XA">Photo</a></li>
+<li>Henry Be: <a href="https://unsplash.com/photos/lc7xcWebECc">The Library of Trinity College</a></li>
+<li>Isabela Kronemberger: <a href="https://unsplash.com/photos/OegFhZfw6Ok">set of tools</a></li>
+<li>Kasia Gajek: <a href="https://unsplash.com/photos/UMne1WKuesY">Photo</a></li>
+<li>Max Saeling: <a href="https://unsplash.com/photos/_CGxNOLM1gQ">Photo</a></li>
+<li>NASA: <a href="https://unsplash.com/photos/1lfI7wkGWZ4">United States seen from orbit</a></li>
+<li>Nicole Avagliano: <a href="https://unsplash.com/photos/TeLjs2pL5fA">Photo</a></li>
+<li>Sander Weeteling: <a href="https://unsplash.com/photos/KABfjuSOx74">Photo</a></li>
+<li>Scott Gummerson: <a href="https://unsplash.com/photos/4gTA4jCQzg8">New York Taxi inc. added dents</a></li>
+</ul>
 
 </div>
 </div>
