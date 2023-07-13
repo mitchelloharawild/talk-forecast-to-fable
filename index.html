@@ -1254,8 +1254,8 @@ function (x, ...)
     return(ets(x, model = etsmodel, allow.multiplicative.trend = allow.multiplicative.trend, 
         ...))
 }
-&lt;bytecode: 0x558f8b932e20&gt;
-&lt;environment: 0x558f8b9355c8&gt;
+&lt;bytecode: 0x56165f9b7ac8&gt;
+&lt;environment: 0x56165f9ba270&gt;
 
 $lambda
 [1] 0
@@ -1778,32 +1778,34 @@ Training set 309.8357 1214.506 949.2825 1.147917 4.380119    1 0.3578434</code><
 </div>
 <p><img data-src="backgrounds/nicole-avagliano-TeLjs2pL5fA-unsplash.jpg" class="image-right"></p>
 </section>
-<section id="section-29" class="slide level2">
+<section id="section-29" class="slide level2 fragment-remove">
 <h2></h2>
 <div class="columns">
 <div class="column" style="width:60%;">
 <p><img data-src="resources/forecast.svg" class="sticker-float-midright"></p>
 <h3 id="design-element-forecasts-2">Design element: forecasts</h3>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-25_1a9318a035da26af08bd8a2f47d0266a">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-25_f14b27d24150e3076214a7af7e103c85">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">library</span>(forecast)</span>
 <span id="cb45-2"><a href="#cb45-2"></a>fc <span class="ot">&lt;-</span> tourism_ts <span class="sc">|&gt;</span> </span>
-<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">ets</span>(<span class="at">model =</span> <span class="st">"AAA"</span>, <span class="at">damped =</span> <span class="cn">FALSE</span>, <span class="at">lambda =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">forecast</span>(<span class="at">level =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">75</span>))</span>
-<span id="cb45-5"><a href="#cb45-5"></a>fc<span class="sc">$</span>mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">ets</span>(<span class="at">model =</span> <span class="st">"AAA"</span>, <span class="at">damped =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb45-4"><a href="#cb45-4"></a>      <span class="at">lambda =</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb45-5"><a href="#cb45-5"></a>  <span class="fu">forecast</span>(<span class="at">level =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">75</span>))</span>
+<span id="cb45-6"><a href="#cb45-6"></a>fc<span class="sc">$</span>mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Qtr1     Qtr2     Qtr3     Qtr4
 2018 29567.60 27887.75 27685.96 28999.64
 2019 31266.10 29489.76 29276.38 30665.52</code></pre>
 </div>
 </div>
+<div class="fragment fade-out" data-fragment-index="2">
 <div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-26_9f20727b7c4a15c870d64b1f0a8e2d99">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>fc<span class="sc">$</span>upper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-27_5f4213abe90f67a7de49bdf22e772693">
 <div class="cell-output cell-output-stdout">
 <pre><code>             50%      75%
-2018 Q1 30274.12 30851.61
-2018 Q2 28453.29 29062.86</code></pre>
+2018 Q1 30419.35 31035.00
+2018 Q2 28712.30 29308.65</code></pre>
 </div>
 </div>
 <div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-28_4d56e84daff97896b7b739f8d213d31d">
@@ -1812,15 +1814,26 @@ Training set 309.8357 1214.506 949.2825 1.147917 4.380119    1 0.3578434</code><
 <div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-29_8e29a6f724758b82703f2164f1e1f6a6">
 <div class="cell-output cell-output-stdout">
 <pre><code>             50%      75%
-2018 Q1 28695.10 28157.97
-2018 Q2 26793.87 26231.88</code></pre>
+2018 Q1 28739.69 28169.58
+2018 Q2 27086.89 26535.74</code></pre>
 </div>
 </div>
-<div class="fragment fade-in">
+</div>
+<div class="fragment fade-in" data-fragment-index="1">
 <div class="callout callout-note no-icon callout-style-simple">
 <div class="callout-body">
 <div class="callout-content">
 <p>The forecast mean is in <code>$mean</code>… or is it?</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment fade-in" data-fragment-index="2">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>The transformation has skewed the distribution, and <code>$mean</code> is now actually the forecast distribution’s <strong>median</strong>!</p>
+<p>To obtain the <strong>mean</strong>, set <code>biasadj = TRUE</code>. Huh?!</p>
 </div>
 </div>
 </div>
@@ -1835,27 +1848,17 @@ Training set 309.8357 1214.506 949.2825 1.147917 4.380119    1 0.3578434</code><
 <div class="column" style="width:60%;">
 <p><img data-src="resources/forecast.svg" class="sticker-float-midright"></p>
 <h3 id="design-element-forecasts-3">Design element: forecasts</h3>
-<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-30_217d496d785f61a0fa914c33d6d9f14b">
+<div class="cell" data-hash="index_cache/revealjs/unnamed-chunk-30_956f652bdb1027b24af6dee23b7a8e97">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">library</span>(forecast)</span>
 <span id="cb51-2"><a href="#cb51-2"></a>fc <span class="ot">&lt;-</span> tourism_ts <span class="sc">|&gt;</span> </span>
-<span id="cb51-3"><a href="#cb51-3"></a>  <span class="fu">ets</span>(<span class="at">model =</span> <span class="st">"AAA"</span>, <span class="at">damped =</span> <span class="cn">FALSE</span>, <span class="at">lambda =</span> <span class="dv">0</span>, <span class="at">biasadj =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb51-4"><a href="#cb51-4"></a>  <span class="fu">forecast</span>(<span class="at">level =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">75</span>))</span>
-<span id="cb51-5"><a href="#cb51-5"></a>fc<span class="sc">$</span>mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb51-3"><a href="#cb51-3"></a>  <span class="fu">ets</span>(<span class="at">model =</span> <span class="st">"AAA"</span>, <span class="at">damped =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb51-4"><a href="#cb51-4"></a>      <span class="at">lambda =</span> <span class="dv">0</span>, <span class="at">biasadj =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb51-5"><a href="#cb51-5"></a>  <span class="fu">forecast</span>(<span class="at">level =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">75</span>))</span>
+<span id="cb51-6"><a href="#cb51-6"></a>fc<span class="sc">$</span>mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Qtr1     Qtr2     Qtr3     Qtr4
 2018 29593.81 27913.78 27713.50 29030.76
 2019 31302.69 29527.75 29318.23 30714.46</code></pre>
-</div>
-</div>
-<p><br><br></p>
-<div class="fragment fade-in">
-<div class="callout callout-note no-icon callout-style-simple">
-<div class="callout-body">
-<div class="callout-content">
-<p>The transformation has skewed the distribution, and <code>$mean</code> is now actually the forecast distribution’s <strong>median</strong>!</p>
-<p>To obtain the <strong>mean</strong>, set <code>biasadj = TRUE</code>. Huh?!</p>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -2146,9 +2149,7 @@ Training set 309.8357 1214.506 949.2825 1.147917 4.380119    1 0.3578434</code><
 </div>
 </div>
 </div>
-</section>
-<section id="references" class="slide level2">
-<h2>References</h2>
+<!-- ## References -->
 <div class="footer footer-default">
 
 </div>
