@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
 
 Slides and notes for a talk at the 2023 New York R (13-14th July 2023) in Manhattan, New York USA.
 
-<!-- A recording of this presentation is available on YouTube here: <https://www.youtube.com/watch?v=> -->
+A recording of this presentation is available on YouTube here: <https://www.youtube.com/watch?v=IFTfHfmR1h8>
 
-<!-- [![](preview.jpg)](https://www.youtube.com/watch?v=) -->
+[![](preview.jpg)](https://www.youtube.com/watch?v=IFTfHfmR1h8)
 
 #### Abstract
 
